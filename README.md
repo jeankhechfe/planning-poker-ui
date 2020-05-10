@@ -1,4 +1,4 @@
-![PlanningPokerUI | CI](https://github.com/BurakCanKOCAK/PlanningPokerUI/workflows/PlanningPokerUI%20%7C%20CI/badge.svg?branch=master)
+![PlanningPokerUI [Master]](https://github.com/BurakCanKOCAK/PlanningPokerUI/workflows/PlanningPokerUI%20%5BMaster%5D/badge.svg?branch=master)
 # planning_poker_ui
 
 ## Project setup
