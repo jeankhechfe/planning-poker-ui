@@ -1,5 +1,6 @@
 <template>
-  <div class="about container">
+  <div class="about">
+      <Header />
     <div class="text-center">
       <img alt="Vue logo" src="../assets/poker-logo.png" />
       <h1>The Best Agile Planning Tool</h1>
@@ -9,7 +10,12 @@
 </template>
 
 <script>
+import Header from "@/components/Header.vue";
+
 export default {
   name: "About",
+    components: {
+    Header,
+  },
 };
 </script>
