@@ -12,9 +12,9 @@
                     <div class="card-body">
                         <form method="POST" action="">
                             <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">Email Address</label>
+                                <label for="username" class="col-md-4 col-form-label text-md-right">Username</label>
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="email" required autofocus>
+                                    <input id="username" type="text" class="form-control" name="username" required autofocus>
                                 </div>
                             </div>
                             <div class="form-group row">
