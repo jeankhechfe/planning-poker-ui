@@ -17,7 +17,7 @@
   </b-navbar>
 
   <body>
-    <div class="container">
+    <div>
       <h1>Sidebar container</h1>
       <Content />
     </div>
