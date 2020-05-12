@@ -56,7 +56,7 @@ export default {
 
 <style scoped>
     .container {
-        margin-top: 5rem;
+        margin-top: 2rem;
     }
     .btn-primary {
         text-transform: uppercase;
@@ -85,7 +85,6 @@ export default {
         border-radius: 0;
     }
     .logo {
-        margin: 25px 0;
         width: 30%
     }
 </style>

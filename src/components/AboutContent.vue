@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="About">
     <div class="text-center">
       <img alt="Poker logo" src="../assets/poker-logo.png" />
       <h1>The Best Agile Planning Tool</h1>
@@ -21,3 +21,9 @@ export default {
   name: "AboutContent",
 };
 </script>
+
+<style scoped>
+.About {
+  margin-top: 30px;
+}
+</style>
