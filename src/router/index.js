@@ -4,7 +4,6 @@ import Main from "../views/Main.vue";
 import About from "../views/About.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
-
 Vue.use(VueRouter);
 
 const routes = [
