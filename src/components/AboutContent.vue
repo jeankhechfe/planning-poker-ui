@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="text-center">
-      <img alt="Vue logo" src="../assets/poker-logo.png" />
+      <img alt="Poker logo" src="../assets/poker-logo.png" />
       <h1>The Best Agile Planning Tool</h1>
     </div>
     <div class="container">
