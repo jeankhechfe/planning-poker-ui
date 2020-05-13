@@ -5,6 +5,7 @@
         <Header />
         <h1>Sidebar container</h1>
         <SearchBar />
+        <ProjectsList />
         <Content />
       </div>
     </body>
@@ -16,6 +17,7 @@
 import Header from "@/components/Header.vue";
 import Content from "@/components/Content.vue";
 import SearchBar from "@/components/SearchBar";
+import ProjectsList from "@/components/ProjectsList";
 
 export default {
   name: "Body",
@@ -23,6 +25,7 @@ export default {
     Header,
     SearchBar,
     Content,
+    ProjectsList,
   },
 };
 </script>
