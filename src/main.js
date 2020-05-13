@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import axios from "axios";
+import Axios from "axios";
 
 //Fontawesome
 import "@fortawesome/fontawesome-free/css/all.css";
@@ -15,13 +15,20 @@ library.add([faHome, faUser, faWrench]);
 
 Vue.component("fa-icons", FontawesomeIcon);
 
+//Authentication
+Axios.defaults.baseURL = "http://localhost:8080";
+Axios.defaults.withCredentials = true;
+
+Vue.prototype.$http = Axios;
+const token = localStorage.getItem("token");
+if (token) {
+  Vue.prototype.$http.defaults.headers.common["Authorization"] = token;
+}
+
 //Bootstrap
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
-
-axios.defaults.baseURL = "http://localhost:8080";
-axios.defaults.withCredentials = true;
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);
