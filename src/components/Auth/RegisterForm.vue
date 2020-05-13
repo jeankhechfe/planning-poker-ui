@@ -19,6 +19,7 @@
                   >
                   <div class="col-md-6">
                     <input
+                      v-model="username"
                       id="username"
                       type="text"
                       class="form-control"
@@ -36,6 +37,7 @@
                   >
                   <div class="col-md-6">
                     <input
+                      v-model="email"
                       id="email"
                       type="email"
                       class="form-control"
@@ -53,6 +55,7 @@
                   >
                   <div class="col-md-6">
                     <input
+                      v-model="password"
                       id="password"
                       type="password"
                       class="form-control"
@@ -69,6 +72,7 @@
                   >
                   <div class="col-md-6">
                     <input
+                      v-model="password_confirmation"
                       id="confirm_password"
                       type="password"
                       class="form-control"
@@ -117,42 +121,42 @@ export default {
 </script>
 
 <style scoped>
-    .container {
-        margin-top: 2rem;
-    }
-        .btn-primary {
-            text-transform: uppercase;
-            border: 1px solid #CF142B;
-            color: #686868;
-            background-color: rgba(255, 255, 255, 0);
-            border-radius: 0;
-        }
-        .btn-primary:hover,
-        .btn-primary:focus,
-        .btn-primary:active {
-            background-color: #CF142B!important;
-            color: #fff!important;
-            border-color: #CF142B!important;
-            -webkit-box-shadow: none!important;
-            box-shadow: none!important;
-        }
-        .form-control:focus {
-            border-color: #CF142B;
-            -webkit-box-shadow: none;
-            box-shadow: none;
-        }
-        .card,
-        .card-header,
-        .form-control {
-            border-radius: 0;
-        }
-        .logo {
-            width: 30%
-        }
-        .etc-login-form p {
-          margin: 0;
-        }
-        .card {
-          margin-bottom: 30px;
-        }
+.container {
+  margin-top: 2rem;
+}
+.btn-primary {
+  text-transform: uppercase;
+  border: 1px solid #cf142b;
+  color: #686868;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 0;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #cf142b !important;
+  color: #fff !important;
+  border-color: #cf142b !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+.form-control:focus {
+  border-color: #cf142b;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.card,
+.card-header,
+.form-control {
+  border-radius: 0;
+}
+.logo {
+  width: 30%;
+}
+.etc-login-form p {
+  margin: 0;
+}
+.card {
+  margin-bottom: 30px;
+}
 </style>

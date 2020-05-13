@@ -15,5 +15,21 @@ export default {
     Header,
     LoginForm,
   },
+  data() {
+    return {
+      username: "",
+      password: "",
+    };
+  },
+  methods: {
+    login: function() {
+      let email = this.email;
+      let password = this.password;
+      this.$store
+        .dispatch("login", { email, password })
+        .then(() => this.$router.push("/"))
+        .catch((err) => console.log(err));
+    },
+  },
 };
 </script>
