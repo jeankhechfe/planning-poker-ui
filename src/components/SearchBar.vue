@@ -1,34 +1,98 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <input class="form-control" type="text" placeholder="Search Projects..." aria-label="Search">
-            </div>
-            <div class="col-md-6">
-                <router-link class="btn btn-success float-right" :to="{ name: 'Main' }">Create Project</router-link>
-            </div>
-        </div>
+  <div class="container">
+    <div class="row bar">
+      <div class="col-md-6">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Search Projects..."
+          aria-label="Search"
+        />
+      </div>
+      <div class="col-md-6">
+        <b-button
+          variant="primary"
+          v-b-modal.createProjectModal
+          class="btn btn-success float-right"
+        >Create Project</b-button>
+        <b-modal id="createProjectModal" ref="createProjectModal" hide-footer="true" hide-header="true">
+          <div>
+            <h3>Create New Project</h3>
+            <hr />
+            <b-form>
+              <div class="form-group row">
+                <label for="title" class="col-md-3 col-form-label text-md-right">Title</label>
+                <div class="col-md-9">
+                  <b-form-input
+                    id="title"
+                    class="form-control"
+                    v-model="text"
+                    placeholder="Project title"
+                    name="title"
+                    required
+                  ></b-form-input>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="description" class="col-md-3 col-form-label text-md-right">Description</label>
+                <div class="col-md-9">
+                  <b-form-textarea
+                    id="description"
+                    class="form-control"
+                    v-model="text"
+                    placeholder="Enter project description..."
+                    rows="6"
+                    max-rows="6"
+                    name="description"
+                    required
+                  ></b-form-textarea>
+                </div>
+              </div>
+              <div class="text-right">
+                <b-button class="btn-modal" @click="hideModal">Cancel</b-button>
+                <b-button class="btn-modal" variant="success"  @click="createProject">Cearte</b-button>
+              </div>
+            </b-form>
+          </div>
+        </b-modal>
+      </div>
     </div>
-
+  </div>
 </template>
 
 <script>
 export default {
-    name: "SearchBar",
-}
+  name: "SearchBar",
+  methods: {
+    hideModal() {
+      this.$refs["createProjectModal"].hide();
+    },
+    createProject() {
+        //TODO
+    }
+  }
+};
 </script>
 
 <style scoped>
-.container {
-    background-color: #f6f6f6;
-    padding: 15px;
+.bar {
+  background-color: #f6f6f6;
+  padding: 15px 0;
+  margin: 0;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 .form-control {
-    border-radius: 0;
+  border-radius: 0;
 }
 .form-control:focus {
-    border-color: #CF142B;
-    -webkit-box-shadow: none;
-    box-shadow: none;
+  border-color: #cf142b;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.btn {
+  border-radius: 0;
+}
+.btn-modal {
+  margin-left: 15px;
 }
 </style>
