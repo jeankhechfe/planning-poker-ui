@@ -78,7 +78,7 @@ export default {
 .bar {
   background-color: #f6f6f6;
   padding: 15px 0;
-  margin: 0;
+  margin: 30px 0;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 .form-control {

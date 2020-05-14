@@ -3,7 +3,6 @@
     <body>
       <div>
         <Header />
-        <h1>Sidebar container</h1>
         <SearchBar />
         <ProjectsList />
       </div>

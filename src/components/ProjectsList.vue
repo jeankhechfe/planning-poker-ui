@@ -54,14 +54,14 @@ export default {
 
 <style scoped>
 .container {
-  /* background-color: #f6f6f6; */
-  padding: 15px;
   margin-top: 30px;
 }
 .single-project {
     background-color: #eee;
     padding: 15px;
     margin-bottom: 30px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s ease 0s;
 }
 .project-name {
     font-size: 24px;
@@ -75,5 +75,23 @@ export default {
     color: #686868;
     background-color: rgba(255, 255, 255, 0);
     border-radius: 0;
+}
+.single-project:hover {
+    background-color: #43484E;
+    color: #fff;
+}
+.single-project:hover .btn-primary {
+    background-color: #ddd;
+    color: #CF142B;
+    border-color: #ddd;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+ .btn-primary:active {
+    background-color: #CF142B!important;
+    border-color: #CF142B!important;
+    color: #fff!important;
+    box-shadow: none!important;
+    border-color: none!important;
 }
 </style>
