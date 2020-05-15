@@ -5,7 +5,7 @@ import About from "../views/About.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Project from "../views/Project.vue";
-import Epic from "../views/Epic.vue";
+import Task from "../views/Task.vue";
 
 Vue.use(VueRouter);
 
@@ -36,9 +36,9 @@ const routes = [
     component: Project,
   },
   {
-    path: "/project/:projectId/epic/:id",
-    name: "Epic",
-    component: Epic,
+    path: "/project/:projectId/task/:id",
+    name: "Task",
+    component: Task,
   },
 ];
 

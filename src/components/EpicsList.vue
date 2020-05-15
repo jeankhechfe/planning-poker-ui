@@ -75,7 +75,7 @@
                 </div>
                 <div class="col-sm-2">
                   <router-link
-                    :to="{ name: 'Epic', params: { id: epic.id, projectId: 2 } }"
+                    :to="{ name: 'Task', params: { id: epic.id, projectId: 2 } }"
                     class="btn btn-estimate float-right"
                   >Estimat now</router-link>
                 </div>
