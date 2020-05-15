@@ -8,7 +8,7 @@
             <p>{{project.description}}</p>
           </div>
           <div class="text-right">
-            <router-link :to="{ name: 'Main' }" class="btn btn-primary">Open</router-link>
+            <router-link :to="{ name: 'Project', params: { id: project.id } }" class="btn btn-primary">Open</router-link>
           </div>
         </div>
       </div>

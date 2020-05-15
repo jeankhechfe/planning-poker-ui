@@ -5,19 +5,19 @@
         <input
           class="form-control"
           type="text"
-          placeholder="Search Projects..."
+          placeholder="Search Epics..."
           aria-label="Search"
         />
       </div>
       <div class="col-md-6">
         <b-button
           variant="primary"
-          v-b-modal.createProjectModal
+          v-b-modal.createEpicModal
           class="btn btn-success float-right"
-        >Create Project</b-button>
-        <b-modal id="createProjectModal" ref="createProjectModal" hide-footer="true" hide-header="true">
+        >Create Epic</b-button>
+        <b-modal id="createEpicModal" ref="createEpicModal" hide-footer="true" hide-header="true">
           <div>
-            <h3>Create New Project</h3>
+            <h3>Create New Epic</h3>
             <hr />
             <b-form>
               <div class="form-group row">
@@ -27,7 +27,7 @@
                     id="title"
                     class="form-control"
                     v-model="text"
-                    placeholder="Project title"
+                    placeholder="Epic title"
                     name="title"
                     required
                   ></b-form-input>
@@ -40,7 +40,7 @@
                     id="description"
                     class="form-control"
                     v-model="text"
-                    placeholder="Enter project description..."
+                    placeholder="Enter epic description..."
                     rows="6"
                     max-rows="6"
                     name="description"
@@ -50,7 +50,7 @@
               </div>
               <div class="text-right">
                 <b-button class="btn-modal" @click="hideModal">Cancel</b-button>
-                <b-button class="btn-modal" variant="success"  @click="createProject">Cearte</b-button>
+                <b-button class="btn-modal" variant="success"  @click="createEpic">Cearte</b-button>
               </div>
             </b-form>
           </div>
@@ -62,12 +62,12 @@
 
 <script>
 export default {
-  name: "SearchBar",
+  name: "EpicsBar",
   methods: {
     hideModal() {
-      this.$refs["createProjectModal"].hide();
+      this.$refs["createEpicModal"].hide();
     },
-    createProject() {
+    createEpic() {
         //TODO
     }
   }
