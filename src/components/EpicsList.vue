@@ -1,21 +1,100 @@
 <template>
   <div class="container">
     <div class="row">
-      <div v-for="epic in epics" v-bind:key="epic.id" class="col-sm-4">
+      <div v-for="epic in epics" v-bind:key="epic.id" class="col-sm-12">
         <div class="single-epic">
-          <h2 class="epic-name text-center">{{epic.name}}</h2>
+          <h2 class="epic-name">{{epic.name}}</h2>
           <ul class="post-meta">
             <li>
               <i class="fa fa-clock"></i>
               <strong> Tasks:</strong>
-              {{epic.tasksNumber}}
+              {{epic.tasks.length}}
             </li>
           </ul>
           <div class="epic-content">
             <p>{{epic.description}}</p>
           </div>
-          <div class="text-right">
-            <router-link :to="{ name: 'Epic', params: { id: epic.id, projectId: 2 } }" class="btn btn-primary">Open</router-link> <!-- get projectId dynamically -->
+          <div class="row">
+            <div class="col-md-12" style="padding-right: 30px;">
+              <b-button
+                variant="primary"
+                v-b-modal.createTaskModal
+                class="btn btn-success float-right"
+              >Add Task</b-button>
+            </div>
+          </div>
+          <b-modal id="createTaskModal" ref="createTaskModal" hide-footer="true" hide-header="true">
+            <div>
+              <h3>Add Task to Epic {{epic.name}}</h3>
+              <hr />
+              <b-form>
+                <div class="form-group row">
+                  <label for="title" class="col-md-3 col-form-label text-md-right">Title</label>
+                  <div class="col-md-9">
+                    <b-form-input
+                      id="title"
+                      class="form-control"
+                      v-model="text"
+                      placeholder="Task title"
+                      name="title"
+                      required
+                    ></b-form-input>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="description" class="col-md-3 col-form-label text-md-right">Description</label>
+                  <div class="col-md-9">
+                    <b-form-textarea
+                      id="description"
+                      class="form-control"
+                      v-model="text"
+                      placeholder="Enter task description..."
+                      rows="6"
+                      max-rows="6"
+                      name="description"
+                      required
+                    ></b-form-textarea>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <b-button class="btn-modal" @click="hideModal">Cancel</b-button>
+                  <b-button class="btn-modal" variant="success" @click="createTask">Add</b-button>
+                </div>
+              </b-form>
+            </div>
+          </b-modal>
+          <div>
+            <h4>Tasks need Estimation</h4>
+            <div v-for="task in epic.tasks" v-bind:key="task.id" class="col-sm-12">
+              <div class="row single-task" v-if="task.estimation == null">
+                <div class="col-sm-2">
+                  <h5>{{task.name}}</h5>
+                </div>
+                <div class="col-sm-8 text-center">
+                  <p>{{task.description}}</p>
+                </div>
+                <div class="col-sm-2">
+                  <router-link
+                    :to="{ name: 'Epic', params: { id: epic.id, projectId: 2 } }"
+                    class="btn btn-estimate float-right"
+                  >Estimat now</router-link>
+                </div>
+              </div>
+            </div>
+            <h4 style="margin-top: 40px;">Estimated Tasks</h4>
+            <div v-for="task in epic.tasks" v-bind:key="task.id" class="col-sm-12">
+              <div class="row single-task" v-if="task.estimation != null">
+                <div class="col-sm-2">
+                  <h5>{{task.name}}</h5>
+                </div>
+                <div class="col-sm-8 text-center">
+                  <p>{{task.description}}</p>
+                </div>
+                <div class="col-sm-2 text-center">
+                  <h3 class="estimation">{{task.estimation}}</h3>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -26,29 +105,52 @@
 <script>
 export default {
   name: "EpicsList",
+  methods: {
+    hideModal() {
+      this.$refs["createTaskModal"].hide();
+    },
+    createTask() {
+      //TODO
+    }
+  },
   data() {
     return {
       epics: [
         {
           id: 1,
-          name: "epic1",
+          name: "First Epic",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
-          tasksNumber: 5
-        },
-        {
-          id: 2,
-          name: "epic2",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
-          tasksNumber: 8
-        },
-        {
-          id: 3,
-          name: "epic3",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
-          tasksNumber: 2
+          tasks: [
+            {
+              id: 1,
+              name: "task 1",
+              description:
+                "consecteturcon consectetur adipisicing elit. Eligendi non quis exercitatio sectetur adipisicing elit. Eligendi non quis exercitatio. Eligendi non quis exercitatio",
+              estimation: null
+            },
+            {
+              id: 2,
+              name: "task 2",
+              description:
+                "consectetur adipisicing elit. Eligendi non quis exercitatio",
+              estimation: null
+            },
+            {
+              id: 3,
+              name: "task 3",
+              description:
+                "consectetur adipisicing elit. Eligendi non quis exercitatio consectetur adipisicing elit. Eligendi non quis exercitatio consectetur adipisicing elit. Eligendi non quis exercitatio",
+              estimation: 11
+            },
+            {
+              id: 4,
+              name: "task 4",
+              description:
+                "consectetur adipisicing elit. Eligendi non quis exercitatio",
+              estimation: null
+            }
+          ]
         }
       ]
     };
@@ -73,25 +175,25 @@ export default {
   -webkit-box-shadow: 0 2px 0 -1px #ddd;
   box-shadow: 0 2px 0 -1px #ddd;
 }
-.single-epic .btn-primary {
+.single-epic .btn-estimate {
   text-transform: uppercase;
   border: 1px solid #cf142b;
   color: #686868;
   background-color: rgba(255, 255, 255, 0);
   border-radius: 0;
 }
-.single-project:hover {
+.single-task {
+  background-color: #d6d8db;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+.single-task:hover {
   background-color: #43484e;
   color: #fff;
 }
-.single-epic:hover .btn-primary {
-  background-color: #ddd;
-  color: #cf142b;
-  border-color: #ddd;
-}
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active {
+.btn-estimate:hover,
+.btn-estimate:focus,
+.btn-estimate:active,
+.single-task:hover .btn-estimate {
   background-color: #cf142b !important;
   border-color: #cf142b !important;
   color: #fff !important;
@@ -99,17 +201,27 @@ export default {
   border-color: none !important;
 }
 ul {
-  padding:0;
-	overflow:hidden;
+  padding: 0;
+  overflow: hidden;
   margin: 1rem 0;
 }
 ul li {
-	float: left;
-	line-height: 15px;
-	list-style: none;
-	margin-right: 10px;
-	padding-right: 10px;
-	font-size: 16px;
-	color:#999;
+  float: left;
+  line-height: 15px;
+  list-style: none;
+  margin-right: 10px;
+  padding-right: 10px;
+  font-size: 16px;
+  color: #999;
+}
+.btn {
+  border-radius: 0;
+}
+.btn-modal {
+  margin-left: 15px;
+}
+.single-task {
+  padding: 10px 0;
+  margin: 10px 0;
 }
 </style>
