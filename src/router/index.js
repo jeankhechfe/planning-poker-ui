@@ -4,6 +4,9 @@ import Main from "../views/Main.vue";
 import About from "../views/About.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
+import Project from "../views/Project.vue";
+import Task from "../views/Task.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -26,6 +29,16 @@ const routes = [
     path: "/register",
     name: "Register",
     component: Register,
+  },
+  {
+    path: "/project/:id",
+    name: "Project",
+    component: Project,
+  },
+  {
+    path: "/project/:projectId/task/:id",
+    name: "Task",
+    component: Task,
   },
 ];
 

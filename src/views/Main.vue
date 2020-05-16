@@ -3,8 +3,8 @@
     <body>
       <div>
         <Header />
-        <h1>Sidebar container</h1>
-        <Content />
+        <ProjectsBar />
+        <ProjectsList />
       </div>
     </body>
   </div>
@@ -13,13 +13,15 @@
 <script>
 // @ is an alias to /src
 import Header from "@/components/Header.vue";
-import Content from "@/components/Content.vue";
+import ProjectsBar from "@/components/ProjectsBar";
+import ProjectsList from "@/components/ProjectsList";
 
 export default {
   name: "Body",
   components: {
     Header,
-    Content,
+    ProjectsBar,
+    ProjectsList,
   },
 };
 </script>
