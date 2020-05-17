@@ -35,28 +35,24 @@ export default {
             "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
           tasks: [
             {
-              id: 1,
               name: "task 1",
               description:
                 "consecteturcon consectetur adipisicing elit. Eligendi non quis exercitatio sectetur adipisicing elit. Eligendi non quis exercitatio. Eligendi non quis exercitatio",
               estimation: null
             },
             {
-              id: 2,
               name: "task 2",
               description:
                 "consectetur adipisicing elit. Eligendi non quis exercitatio",
               estimation: null
             },
             {
-              id: 3,
               name: "task 3",
               description:
                 "consectetur adipisicing elit. Eligendi non quis exercitatio consectetur adipisicing elit. Eligendi non quis exercitatio consectetur adipisicing elit. Eligendi non quis exercitatio",
               estimation: 11
             },
             {
-              id: 4,
               name: "task 4",
               description:
                 "consectetur adipisicing elit. Eligendi non quis exercitatio",
