@@ -5,7 +5,7 @@
         <Header />
         <div class="text-center"><h2 class="title-one">Project Foo</h2></div> <!-- TODO: get project name dynamically -->
         <EpicsBar />
-        <EpicsList />
+        <EpicsList v-bind:epics="epics" />
       </div>
     </body>
   </div>
@@ -24,6 +24,49 @@ export default {
     EpicsBar,
     EpicsList,
   },
+  // TODO: use axios to get data
+  data() {
+    return {
+      epics: [
+        {
+          id: 1,
+          name: "First Epic",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
+          tasks: [
+            {
+              id: 1,
+              name: "task 1",
+              description:
+                "consecteturcon consectetur adipisicing elit. Eligendi non quis exercitatio sectetur adipisicing elit. Eligendi non quis exercitatio. Eligendi non quis exercitatio",
+              estimation: null
+            },
+            {
+              id: 2,
+              name: "task 2",
+              description:
+                "consectetur adipisicing elit. Eligendi non quis exercitatio",
+              estimation: null
+            },
+            {
+              id: 3,
+              name: "task 3",
+              description:
+                "consectetur adipisicing elit. Eligendi non quis exercitatio consectetur adipisicing elit. Eligendi non quis exercitatio consectetur adipisicing elit. Eligendi non quis exercitatio",
+              estimation: 11
+            },
+            {
+              id: 4,
+              name: "task 4",
+              description:
+                "consectetur adipisicing elit. Eligendi non quis exercitatio",
+              estimation: null
+            }
+          ]
+        }
+      ]
+    };
+  }
 };
 </script>
 

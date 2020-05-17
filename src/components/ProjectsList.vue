@@ -19,36 +19,7 @@
 <script>
 export default {
   name: "ProjectsList",
-  data() {
-    return {
-      projects: [
-        {
-          id: 1,
-          name: "Foo",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?"
-        },
-        {
-          id: 2,
-          name: "Foo",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?"
-        },
-        {
-          id: 3,
-          name: "Foo",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?"
-        },
-        {
-          id: 4,
-          name: "Foo",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?"
-        }
-      ]
-    };
-  }
+  props: ["projects"],
 };
 </script>
 
