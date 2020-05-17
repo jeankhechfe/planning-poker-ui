@@ -15,7 +15,7 @@
           v-b-modal.createProjectModal
           class="btn btn-success float-right"
         >Create Project</b-button>
-        <b-modal id="createProjectModal" ref="createProjectModal" hide-footer="true" hide-header="true">
+        <b-modal id="createProjectModal" ref="createProjectModal" hide-footer hide-header>
           <div>
             <h3>Create New Project</h3>
             <hr />

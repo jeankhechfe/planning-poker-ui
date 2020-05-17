@@ -23,7 +23,7 @@
               >Add Task</b-button>
             </div>
           </div>
-          <b-modal id="createTaskModal" ref="createTaskModal" hide-footer="true" hide-header="true">
+          <b-modal id="createTaskModal" ref="createTaskModal" hide-footer hide-header>
             <div>
               <h3>Add Task to Epic {{epic.name}}</h3>
               <hr />

@@ -15,7 +15,7 @@
           v-b-modal.createEpicModal
           class="btn btn-success float-right"
         >Create Epic</b-button>
-        <b-modal id="createEpicModal" ref="createEpicModal" hide-footer="true" hide-header="true">
+        <b-modal id="createEpicModal" ref="createEpicModal" hide-footer hide-header>
           <div>
             <h3>Create New Epic</h3>
             <hr />
