@@ -26,7 +26,7 @@
                   <b-form-input
                     id="title"
                     class="form-control"
-                    v-model="text"
+                    v-model="title"
                     placeholder="Epic title"
                     name="title"
                     required
@@ -39,7 +39,7 @@
                   <b-form-textarea
                     id="description"
                     class="form-control"
-                    v-model="text"
+                    v-model="description"
                     placeholder="Enter epic description..."
                     rows="6"
                     max-rows="6"
@@ -63,6 +63,12 @@
 <script>
 export default {
   name: "EpicsBar",
+  data() {
+    return {
+      title: '',
+      description: '',
+    }
+  },
   methods: {
     hideModal() {
       this.$refs["createEpicModal"].hide();

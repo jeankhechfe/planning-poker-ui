@@ -115,9 +115,19 @@
 </template>
 
 <script>
+// import Axios from "axios";
 export default {
   name: "RegisterForm",
+  data() {
+    return {
+      username: '',
+      email: '',
+      password: '',
+      password_confirmation: '',
+    }
+  },
 };
+
 </script>
 
 <style scoped>

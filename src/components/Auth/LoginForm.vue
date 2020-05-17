@@ -82,6 +82,12 @@
 <script>
 export default {
   name: "LoginForm",
+  data() {
+    return {
+      username: '',
+      password: '',
+    }
+  },
 };
 </script>
 
