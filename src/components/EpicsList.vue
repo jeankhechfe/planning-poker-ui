@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div v-for="epic in epics" v-bind:key="epic.id" class="col-sm-12">
+      <div v-for="(epic, index) in epics" v-bind:key="epic.id" class="col-sm-12">
         <div class="single-epic">
           <h2 class="epic-name">{{epic.name}}</h2>
           <ul class="post-meta">
@@ -57,7 +57,7 @@
                   </div>
                 </div>
                 <div class="text-right">
-                  <b-button class="btn-modal" @click="hideModal">Cancel</b-button>
+                  <b-button class="btn-modal" @click="hideModal(index)">Cancel</b-button>
                   <b-button class="btn-modal" variant="success" @click="createTask">Add</b-button>
                 </div>
               </b-form>
@@ -112,8 +112,8 @@ export default {
     }
   },
   methods: {
-    hideModal() {
-      this.$refs["createTaskModal"].hide();
+    hideModal(index) {
+      this.$refs["createTaskModal"][index].hide();
     },
     createTask() {
       //TODO
