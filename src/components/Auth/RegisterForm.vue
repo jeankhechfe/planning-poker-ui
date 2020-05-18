@@ -17,11 +17,7 @@
             <div class="card-body">
               <form @submit.prevent="register">
                 <div class="form-group row">
-                  <label
-                    for="username"
-                    class="col-md-4 col-form-label text-md-right"
-                    >Username</label
-                  >
+                  <label for="username" class="col-md-4 col-form-label text-md-right">Username</label>
                   <div class="col-md-6">
                     <input
                       v-model="username"
@@ -35,11 +31,7 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label
-                    for="email"
-                    class="col-md-4 col-form-label text-md-right"
-                    >Email Address</label
-                  >
+                  <label for="email" class="col-md-4 col-form-label text-md-right">Email Address</label>
                   <div class="col-md-6">
                     <input
                       v-model="email"
@@ -53,11 +45,7 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label
-                    for="password"
-                    class="col-md-4 col-form-label text-md-right"
-                    >Password</label
-                  >
+                  <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                   <div class="col-md-6">
                     <input
                       v-model="password"
@@ -73,8 +61,7 @@
                   <label
                     for="confirm_password"
                     class="col-md-4 col-form-label text-md-right"
-                    >Confirm Password</label
-                  >
+                  >Confirm Password</label>
                   <div class="col-md-6">
                     <input
                       v-model="password_confirmation"
@@ -97,9 +84,7 @@
                 </div>
                 <div class="form-group row mb-0">
                   <div class="col-md-8 offset-md-4">
-                    <button type="submit" class="btn btn-primary">
-                      Register
-                    </button>
+                    <button type="submit" class="btn btn-primary">Register</button>
                   </div>
                 </div>
               </form>
@@ -120,35 +105,35 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../../service/axios-auth";
 export default {
   name: "RegisterForm",
   data() {
     return {
-      username: '',
-      email: '',
-      password: '',
-      password_confirmation: '',
-      no_response: false,
-    }
+      username: "",
+      email: "",
+      password: "",
+      password_confirmation: "",
+      no_response: false
+    };
   },
   methods: {
-      register() {
-        axios.post('http://localhost:5001/api/register',{"Login": this.username})
+    register() {
+      axios
+        .post("/register", { Login: this.username })
         .then(response => {
           //TODO: store user state
           console.log(response);
-          this.$router.push({ name: 'Main' });
+          this.$router.push({ name: "Main" });
         })
         .catch(error => {
-          if(!error.response) {
+          if (!error.response) {
             this.no_response = true;
           }
         });
-      }
+    }
   }
 };
-
 </script>
 
 <style scoped>
