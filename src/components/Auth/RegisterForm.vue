@@ -2,10 +2,10 @@
   <div>
     <div class="container">
       <div
-        v-if="registed_error"
+        v-if="no_response"
         class="alert alert-danger"
         role="alert"
-      >Our serve is having some issues, please try again later</div>
+      >Our backend serve is having some issues, please try again later</div>
       <div class="row justify-content-center">
         <div class="col-md-8">
           <div class="card">
@@ -129,7 +129,7 @@ export default {
       email: '',
       password: '',
       password_confirmation: '',
-      registed_error: false,
+      no_response: false,
     }
   },
   methods: {
@@ -142,7 +142,7 @@ export default {
         })
         .catch(error => {
           if(!error.response) {
-            this.registed_error = true;
+            this.no_response = true;
           }
         });
       }

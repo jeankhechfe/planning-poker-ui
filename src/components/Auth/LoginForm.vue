@@ -2,7 +2,12 @@
   <div>
     <div class="container">
       <div
-        v-if="unregisted"
+        v-if="no_response"
+        class="alert alert-danger"
+        role="alert"
+      >Our backend serve is having some issues, please try again later</div>
+      <div
+        v-if="not_registered"
         class="alert alert-danger"
         role="alert"
       >The username you have entered doesn't match any account</div>
@@ -82,7 +87,8 @@ export default {
     return {
       username: "",
       password: "",
-      unregisted: false
+      not_registered: false,
+      no_response: false,
     };
   },
   methods: {
@@ -95,8 +101,10 @@ export default {
           this.$router.push({ name: 'Main' });
         })
         .catch(error => {
-          if(error.response.status == 400)
-          this.unregisted = true
+          if(!error.response) {
+            this.no_response = true;
+          }else if(error.response.status == 400)
+            this.not_registered = true
         });
     }
   }
