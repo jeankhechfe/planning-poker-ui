@@ -10,13 +10,9 @@
               </div>
             </div>
             <div class="card-body">
-              <form method="POST" action="">
+              <form @submit.prevent="login">
                 <div class="form-group row">
-                  <label
-                    for="username"
-                    class="col-md-4 col-form-label text-md-right"
-                    >Username</label
-                  >
+                  <label for="username" class="col-md-4 col-form-label text-md-right">Username</label>
                   <div class="col-md-6">
                     <input
                       v-model="username"
@@ -30,11 +26,7 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label
-                    for="password"
-                    class="col-md-4 col-form-label text-md-right"
-                    >Password</label
-                  >
+                  <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                   <div class="col-md-6">
                     <input
                       v-model="password"
@@ -57,9 +49,7 @@
                 </div>
                 <div class="form-group row mb-0">
                   <div class="col-md-6 offset-md-4">
-                    <button type="submit" class="btn btn-primary">
-                      Login
-                    </button>
+                    <button type="submit" class="btn btn-primary">Login</button>
                   </div>
                 </div>
               </form>
@@ -80,14 +70,23 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "LoginForm",
   data() {
     return {
-      username: '',
-      password: '',
-    }
+      username: "",
+      password: ""
+    };
   },
+  methods: {
+    login() {
+      axios
+        .post("http://localhost:5001/api/login", { Login: this.username })
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    }
+  }
 };
 </script>
 

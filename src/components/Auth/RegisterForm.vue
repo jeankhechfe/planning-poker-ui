@@ -10,7 +10,7 @@
               </div>
             </div>
             <div class="card-body">
-              <form method="POST" action="">
+              <form @submit.prevent="register">
                 <div class="form-group row">
                   <label
                     for="username"
@@ -115,7 +115,7 @@
 </template>
 
 <script>
-// import Axios from "axios";
+import axios from "axios";
 export default {
   name: "RegisterForm",
   data() {
@@ -126,6 +126,13 @@ export default {
       password_confirmation: '',
     }
   },
+  methods: {
+      register() {
+        axios.post('http://localhost:5001/api/register',{"Login": this.username})
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+      }
+  }
 };
 
 </script>
