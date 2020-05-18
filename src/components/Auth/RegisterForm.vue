@@ -1,6 +1,11 @@
 <template>
   <div>
     <div class="container">
+      <div
+        v-if="registed_error"
+        class="alert alert-danger"
+        role="alert"
+      >Our serve is having some issues, please try again later</div>
       <div class="row justify-content-center">
         <div class="col-md-8">
           <div class="card">
@@ -124,13 +129,22 @@ export default {
       email: '',
       password: '',
       password_confirmation: '',
+      registed_error: false,
     }
   },
   methods: {
       register() {
         axios.post('http://localhost:5001/api/register',{"Login": this.username})
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
+        .then(response => {
+          //TODO: store user state
+          console.log(response);
+          this.$router.push({ name: 'Main' });
+        })
+        .catch(error => {
+          if(!error.response) {
+            this.registed_error = true;
+          }
+        });
       }
   }
 };
@@ -175,5 +189,8 @@ export default {
 }
 .card {
   margin-bottom: 30px;
+}
+.alert {
+  margin-bottom: 2rem;
 }
 </style>

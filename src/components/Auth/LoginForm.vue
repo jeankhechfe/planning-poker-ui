@@ -1,6 +1,11 @@
 <template>
   <div>
     <div class="container">
+      <div
+        v-if="unregisted"
+        class="alert alert-danger"
+        role="alert"
+      >The username you have entered doesn't match any account</div>
       <div class="row justify-content-center">
         <div class="col-md-8">
           <div class="card">
@@ -76,15 +81,23 @@ export default {
   data() {
     return {
       username: "",
-      password: ""
+      password: "",
+      unregisted: false
     };
   },
   methods: {
     login() {
       axios
         .post("http://localhost:5001/api/login", { Login: this.username })
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
+        .then(response => {
+          //TODO: store user state
+          console.log(response);
+          this.$router.push({ name: 'Main' });
+        })
+        .catch(error => {
+          if(error.response.status == 400)
+          this.unregisted = true
+        });
     }
   }
 };
@@ -125,5 +138,8 @@ export default {
 }
 .etc-login-form p {
   margin: 0;
+}
+.alert {
+  margin-bottom: 2rem;
 }
 </style>
