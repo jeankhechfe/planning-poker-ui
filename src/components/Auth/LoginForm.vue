@@ -80,7 +80,8 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../../service/axios-auth";
+
 export default {
   name: "LoginForm",
   data() {
@@ -88,23 +89,22 @@ export default {
       username: "",
       password: "",
       not_registered: false,
-      no_response: false,
+      no_response: false
     };
   },
   methods: {
     login() {
       axios
-        .post("http://localhost:5001/api/login", { Login: this.username })
+        .post("/login", { Login: this.username })
         .then(response => {
           //TODO: store user state
           console.log(response);
-          this.$router.push({ name: 'Main' });
+          this.$router.push({ name: "Main" });
         })
         .catch(error => {
-          if(!error.response) {
+          if (!error.response) {
             this.no_response = true;
-          }else if(error.response.status == 400)
-            this.not_registered = true
+          } else if (error.response.status == 400) this.not_registered = true;
         });
     }
   }
