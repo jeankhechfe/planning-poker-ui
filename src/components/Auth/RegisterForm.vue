@@ -105,7 +105,7 @@
 </template>
 
 <script>
-import axios from "../../service/axios-auth";
+import axios from "../../service/axios-api";
 export default {
   name: "RegisterForm",
   data() {
