@@ -4,17 +4,6 @@ import router from "./router";
 import store from "./store";
 import Axios from "axios";
 
-//Fontawesome
-import "@fortawesome/fontawesome-free/css/all.css";
-import "@fortawesome/fontawesome-free/js/all.js";
-
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontawesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faHome, faUser, faWrench } from "@fortawesome/free-solid-svg-icons";
-library.add([faHome, faUser, faWrench]);
-
-Vue.component("fa-icons", FontawesomeIcon);
-
 //Authentication
 Axios.defaults.baseURL = "http://localhost:8080";
 Axios.defaults.withCredentials = true;
