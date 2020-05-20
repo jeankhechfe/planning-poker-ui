@@ -3,8 +3,13 @@
     <body>
       <div>
         <Header />
-        <ProjectsBar />
-        <ProjectsList v-bind:projects="projects"/>
+        <div class="sidenav container">
+          <SideNav />
+        </div>
+        <div class="main">
+          <ProjectsBar />
+          <ProjectsList v-bind:projects="projects" />
+        </div>
       </div>
     </body>
   </div>
@@ -15,10 +20,12 @@
 import Header from "@/components/Header.vue";
 import ProjectsBar from "@/components/ProjectsBar";
 import ProjectsList from "@/components/ProjectsList";
+import SideNav from "@/components/SideNav";
 
 export default {
   name: "Body",
   components: {
+    SideNav,
     Header,
     ProjectsBar,
     ProjectsList,
@@ -31,28 +38,53 @@ export default {
           id: 1,
           name: "Foo",
           description:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?"
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
         },
         {
           id: 2,
           name: "Foo",
           description:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?"
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
         },
         {
           id: 3,
           name: "Foo",
           description:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?"
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
         },
         {
           id: 4,
           name: "Foo",
           description:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?"
-        }
-      ]
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
+        },
+      ],
     };
-  }
+  },
 };
 </script>
+
+<style scoped>
+.main {
+  overflow: hidden;
+  min-height: 50px;
+}
+
+.sidenav {
+  float: left;
+  width: 50px;
+  margin: 10px;
+  margin-top: 30px;
+}
+
+body {
+  height: 100vh;
+  background: radial-gradient(
+      circle at 94.02% 88.03%,
+      #e73d27,
+      transparent 100%
+    ),
+    radial-gradient(circle at 25.99% 27.79%, #af2c1b, transparent 100%),
+    radial-gradient(circle at 50% 50%, #000000, #000000 100%);
+}
+</style>
