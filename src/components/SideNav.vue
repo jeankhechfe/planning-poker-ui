@@ -70,7 +70,7 @@ nav.main-menu.expanded {
 }
 
 .main-menu {
-  background: #212121;
+  background: #43484E;
   border-right: 1px solid #e5e5e5;
   position: absolute;
   top: 82px;

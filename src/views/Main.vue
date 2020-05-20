@@ -79,12 +79,12 @@ export default {
 
 body {
   height: 100vh;
-  background: radial-gradient(
+  /* background: radial-gradient(
       circle at 94.02% 88.03%,
       #e73d27,
       transparent 100%
-    ),
-    radial-gradient(circle at 25.99% 27.79%, #af2c1b, transparent 100%),
-    radial-gradient(circle at 50% 50%, #000000, #000000 100%);
+    ), */
+    /* radial-gradient(circle at 25.99% 27.79%, #af2c1b, transparent 100%), */
+    /* radial-gradient(circle at 50% 50%, #000000, #000000 100%); */
 }
 </style>
