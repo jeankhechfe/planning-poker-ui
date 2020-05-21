@@ -6,7 +6,7 @@
         <div class="sidenav container">
           <SideNav />
         </div>
-        <div class="main">
+        <div class="dashboard">
           <ProjectsBar />
           <ProjectsList v-bind:projects="projects" />
         </div>
@@ -65,7 +65,7 @@ export default {
 </script>
 
 <style scoped>
-.main {
+.dashboard {
   overflow: hidden;
   min-height: 50px;
 }
@@ -84,7 +84,7 @@ body {
       #e73d27,
       transparent 100%
     ), */
-    /* radial-gradient(circle at 25.99% 27.79%, #af2c1b, transparent 100%), */
-    /* radial-gradient(circle at 50% 50%, #000000, #000000 100%); */
+  /* radial-gradient(circle at 25.99% 27.79%, #af2c1b, transparent 100%), */
+  /* radial-gradient(circle at 50% 50%, #000000, #000000 100%); */
 }
 </style>

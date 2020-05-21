@@ -1,7 +1,7 @@
 <template>
-  <div class="about">
-      <Header />
-      <AboutContent />
+  <div class="landing">
+    <Header />
+    <AboutContent />
   </div>
 </template>
 
@@ -10,8 +10,8 @@ import Header from "@/components/Header.vue";
 import AboutContent from "@/components/AboutContent.vue";
 
 export default {
-  name: "About",
-    components: {
+  name: "Landing",
+  components: {
     Header,
     AboutContent,
   },
