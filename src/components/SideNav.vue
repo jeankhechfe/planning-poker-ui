@@ -98,7 +98,7 @@ nav.main-menu.expanded {
   overflow: hidden;
   -webkit-transition: width 0.05s linear;
   transition: width 0.05s linear;
-  -webkit-transform: translateZ(0) scale(1, 1);
+  transform: translateZ(0) scale(1, 1);
   z-index: 1000;
 }
 
@@ -121,7 +121,7 @@ nav.main-menu.expanded {
   font-family: arial;
   font-size: 14px;
   text-decoration: none;
-  -webkit-transform: translateZ(0) scale(1, 1);
+  transform: translateZ(0) scale(1, 1);
   -webkit-transition: all 0.1s linear;
   transition: all 0.1s linear;
 }

@@ -1,13 +1,11 @@
 <template>
   <div class="text-center">
           <router-link
-            v-if="!loggedIn"
             class="primary-btn"
             :to="{ name: 'Login' }"
             >Login</router-link
           >
           <router-link
-            v-if="!loggedIn"
             class="primary-btn"
             :to="{ name: 'Register' }"
             >Register</router-link
