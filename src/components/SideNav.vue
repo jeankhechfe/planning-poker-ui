@@ -3,18 +3,19 @@
     <nav class="main-menu">
       <ul>
         <li>
-          <router-link to="/">
+          <router-link :to="{ name: 'Landing' }">
             <i class="fa fa-home fa-2x"></i>
             <span class="nav-text">
               Home
             </span>
           </router-link>
         </li>
-        <li class="has-subnav">
-          <router-link to="/login">
-            <i class="fa fa-laptop fa-2x"></i>
+        &nbsp;
+        <li>
+          <router-link :to="{ name: 'Dashboard' }">
+            <i class="fa fa-columns fa-2x"></i>
             <span class="nav-text">
-              Projects
+              Dashboard
             </span>
           </router-link>
         </li>
@@ -70,10 +71,10 @@ nav.main-menu.expanded {
 }
 
 .main-menu {
-  background: #43484E;
+  background: #43484e;
   border-right: 1px solid #e5e5e5;
   position: absolute;
-  top: 82px;
+  top: 0;
   bottom: 0;
   left: 0;
   width: 60px;

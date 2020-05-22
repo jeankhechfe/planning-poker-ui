@@ -2,7 +2,6 @@
   <div>
     <body>
       <div>
-        <Header />
         <div class="sidenav container">
           <SideNav />
         </div>
@@ -17,7 +16,6 @@
 
 <script>
 // @ is an alias to /src
-import Header from "@/components/Header.vue";
 import ProjectsBar from "@/components/ProjectsBar";
 import ProjectsList from "@/components/ProjectsList";
 import SideNav from "@/components/SideNav";
@@ -26,7 +24,6 @@ export default {
   name: "Body",
   components: {
     SideNav,
-    Header,
     ProjectsBar,
     ProjectsList,
   },
