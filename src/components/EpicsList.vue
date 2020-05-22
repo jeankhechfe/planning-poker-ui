@@ -1,18 +1,22 @@
 <template>
   <div class="container">
     <div class="row">
-      <div v-for="(epic, index) in epics" v-bind:key="epic.id" class="col-sm-12">
+      <div
+        v-for="(epic, index) in epics"
+        v-bind:key="epic.id"
+        class="col-sm-12"
+      >
         <div class="single-epic">
-          <h2 class="epic-name">{{epic.name}}</h2>
+          <h2 class="epic-name">{{ epic.name }}</h2>
           <ul class="post-meta">
             <li>
               <i class="fa fa-clock"></i>
               <strong> Tasks:</strong>
-              {{epic.tasks.length}}
+              {{ epic.tasks.length }}
             </li>
           </ul>
           <div class="epic-content">
-            <p>{{epic.description}}</p>
+            <p>{{ epic.description }}</p>
           </div>
           <div class="row">
             <div class="col-md-12" style="padding-right: 30px;">
@@ -20,16 +24,26 @@
                 variant="primary"
                 v-b-modal.createTaskModal
                 class="btn btn-success float-right"
-              >Add Task</b-button>
+                >Add Task</b-button
+              >
             </div>
           </div>
-          <b-modal id="createTaskModal" ref="createTaskModal" hide-footer hide-header>
+          <b-modal
+            id="createTaskModal"
+            ref="createTaskModal"
+            hide-footer
+            hide-header
+          >
             <div>
-              <h3>Add Task to Epic {{epic.name}}</h3>
+              <h3>Add Task to Epic {{ epic.name }}</h3>
               <hr />
               <b-form>
                 <div class="form-group row">
-                  <label for="title" class="col-md-3 col-form-label text-md-right">Title</label>
+                  <label
+                    for="title"
+                    class="col-md-3 col-form-label text-md-right"
+                    >Title</label
+                  >
                   <div class="col-md-9">
                     <b-form-input
                       id="title"
@@ -42,7 +56,11 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="description" class="col-md-3 col-form-label text-md-right">Description</label>
+                  <label
+                    for="description"
+                    class="col-md-3 col-form-label text-md-right"
+                    >Description</label
+                  >
                   <div class="col-md-9">
                     <b-form-textarea
                       id="description"
@@ -57,41 +75,60 @@
                   </div>
                 </div>
                 <div class="text-right">
-                  <b-button class="btn-modal" @click="hideModal(index)">Cancel</b-button>
-                  <b-button class="btn-modal" variant="success" @click="createTask">Add</b-button>
+                  <b-button class="btn-modal" @click="hideModal(index)"
+                    >Cancel</b-button
+                  >
+                  <b-button
+                    class="btn-modal"
+                    variant="success"
+                    @click="createTask"
+                    >Add</b-button
+                  >
                 </div>
               </b-form>
             </div>
           </b-modal>
           <div>
             <h4>Tasks need Estimation</h4>
-            <div v-for="task in epic.tasks" v-bind:key="task.id" class="col-sm-12">
+            <div
+              v-for="task in epic.tasks"
+              v-bind:key="task.id"
+              class="col-sm-12"
+            >
               <div class="row single-task" v-if="task.estimation == null">
                 <div class="col-sm-2">
-                  <h5>{{task.name}}</h5>
+                  <h5>{{ task.name }}</h5>
                 </div>
                 <div class="col-sm-8 text-center">
-                  <p>{{task.description}}</p>
+                  <p>{{ task.description }}</p>
                 </div>
                 <div class="col-sm-2">
                   <router-link
-                    :to="{ name: 'Task', params: { id: epic.id, projectId: 2 } }"
+                    :to="{
+                      name: 'Task',
+                      params: { id: epic.id, projectId: 2 },
+                    }"
                     class="btn btn-estimate float-right"
-                  >Estimat now</router-link>
+                    >Estimate now</router-link
+                  >
                 </div>
               </div>
             </div>
             <h4 style="margin-top: 40px;">Estimated Tasks</h4>
-            <div v-for="task in epic.tasks" v-bind:key="task.id" class="col-sm-12">
+            <div
+              v-for="task in epic.tasks"
+              v-bind:key="task.id"
+              class="col-sm-12"
+            >
               <div class="row single-task" v-if="task.estimation != null">
                 <div class="col-sm-2">
-                  <h5>{{task.name}}</h5>
+                  <h5>{{ task.name }}</h5>
                 </div>
                 <div class="col-sm-8 text-center">
-                  <p>{{task.description}}</p>
+                  <p>{{ task.description }}</p>
                 </div>
                 <div class="col-sm-2 text-center">
-                  <h3 class="estimation">{{task.estimation}}</h3>
+                  <h3 class="estimation">{{ task.estimation }}</h3>
                 </div>
               </div>
             </div>
@@ -107,9 +144,9 @@ export default {
   name: "EpicsList",
   data() {
     return {
-      title: '',
-      description: '',
-    }
+      title: "",
+      description: "",
+    };
   },
   methods: {
     hideModal(index) {
@@ -117,9 +154,9 @@ export default {
     },
     createTask() {
       //TODO
-    }
+    },
   },
-  props: ["epics"]
+  props: ["epics"],
 };
 </script>
 

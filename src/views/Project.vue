@@ -5,7 +5,7 @@
         <div class="sidenav container">
           <SideNav />
         </div>
-        <div class="dashboard">
+        <div>
           <div class="text-center"><h2 class="title-one">Project Foo</h2></div>
           <!-- TODO: get project name dynamically -->
           <EpicsBar />
