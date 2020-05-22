@@ -2,10 +2,15 @@
   <div>
     <body>
       <div>
-        <Header />
-        <div class="text-center"><h2 class="title-one">Project Foo</h2></div> <!-- TODO: get project name dynamically -->
-        <EpicsBar />
-        <EpicsList v-bind:epics="epics" />
+        <div class="sidenav container">
+          <SideNav />
+        </div>
+        <div class="dashboard">
+          <div class="text-center"><h2 class="title-one">Project Foo</h2></div>
+          <!-- TODO: get project name dynamically -->
+          <EpicsBar />
+          <EpicsList v-bind:epics="epics" />
+        </div>
       </div>
     </body>
   </div>
@@ -13,14 +18,14 @@
 
 <script>
 // @ is an alias to /src
-import Header from "@/components/Header.vue";
+import SideNav from "@/components/SideNav.vue";
 import EpicsBar from "@/components/EpicsBar";
 import EpicsList from "@/components/EpicsList";
 
 export default {
   name: "Body",
   components: {
-    Header,
+    SideNav,
     EpicsBar,
     EpicsList,
   },
@@ -38,59 +43,59 @@ export default {
               name: "task 1",
               description:
                 "consecteturcon consectetur adipisicing elit. Eligendi non quis exercitatio sectetur adipisicing elit. Eligendi non quis exercitatio. Eligendi non quis exercitatio",
-              estimation: null
+              estimation: null,
             },
             {
               name: "task 2",
               description:
                 "consectetur adipisicing elit. Eligendi non quis exercitatio",
-              estimation: null
+              estimation: null,
             },
             {
               name: "task 3",
               description:
                 "consectetur adipisicing elit. Eligendi non quis exercitatio consectetur adipisicing elit. Eligendi non quis exercitatio consectetur adipisicing elit. Eligendi non quis exercitatio",
-              estimation: 11
+              estimation: 11,
             },
             {
               name: "task 4",
               description:
                 "consectetur adipisicing elit. Eligendi non quis exercitatio",
-              estimation: null
-            }
-          ]
-        }
-      ]
+              estimation: null,
+            },
+          ],
+        },
+      ],
     };
-  }
+  },
 };
 </script>
 
 <style scoped>
 .title-one {
-	color: #666666;
-	display: inline-block;
-	font-size: 32px;
-	font-weight: 600;
-	text-align: center;
-	text-transform: uppercase;
-	position:relative;
+  color: #666666;
+  display: inline-block;
+  font-size: 32px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  position: relative;
   margin-top: 30px;
 }
 
 .title-one:after {
-	color: #CF142B;
-	content: "||";
-	position: absolute;
-	right: -40px;
-	top: -2px;
+  color: #cf142b;
+  content: "||";
+  position: absolute;
+  right: -40px;
+  top: -2px;
 }
 
 .title-one:before {
-	color: #CF142B;
-	content: "||";
-	left: -40px;
-	position: absolute;
-	top: 0;
+  color: #cf142b;
+  content: "||";
+  left: -40px;
+  position: absolute;
+  top: 0;
 }
 </style>
