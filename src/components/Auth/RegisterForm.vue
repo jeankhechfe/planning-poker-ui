@@ -11,7 +11,9 @@
           <div class="card">
             <div class="card-header">
               <div class="text-center">
-                <img src="../../assets/poker-logo.png" class="logo" />
+                <router-link :to="{ name: 'Landing' }">
+                  <img src="../../assets/poker-logo.png" class="logo" />
+                </router-link>
               </div>
             </div>
             <div class="card-body">
