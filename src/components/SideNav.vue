@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="sidenav container">
     <nav class="main-menu">
       <ul>
-        <li>
+        <!-- <li>
           <router-link :to="{ name: 'Landing' }">
             <i class="fa fa-home fa-2x"></i>
             <span class="nav-text">
@@ -10,7 +10,7 @@
             </span>
           </router-link>
         </li>
-        &nbsp;
+        &nbsp; -->
         <li>
           <router-link :to="{ name: 'Dashboard' }">
             <i class="fa fa-columns fa-2x"></i>
@@ -63,7 +63,12 @@ export default {};
   vertical-align: middle;
   font-size: 20px;
 }
-
+.sidenav {
+  float: left;
+  width: 50px;
+  margin: 10px;
+  margin-top: 30px;
+}
 .main-menu:hover,
 nav.main-menu.expanded {
   width: 250px;

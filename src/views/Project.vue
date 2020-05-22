@@ -2,10 +2,8 @@
   <div>
     <body>
       <div>
-        <div class="sidenav container">
-          <SideNav />
-        </div>
-        <div>
+        <SideNav />
+        <div class="projects">
           <div class="text-center"><h2 class="title-one">Project Foo</h2></div>
           <!-- TODO: get project name dynamically -->
           <EpicsBar />
@@ -72,6 +70,11 @@ export default {
 </script>
 
 <style scoped>
+
+.projects {
+  overflow: hidden;
+  min-height: 50px;
+}
 .title-one {
   color: #666666;
   display: inline-block;

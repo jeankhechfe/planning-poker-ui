@@ -101,7 +101,7 @@ export default {
         .then(response => {
           //TODO: store user state
           console.log(response);
-          this.$router.push({ name: "Main" });
+          this.$router.push({ name: "Dashboard" });
         })
         .catch(error => {
           if (!error.response) {
