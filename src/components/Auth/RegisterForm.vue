@@ -108,6 +108,7 @@
 
 <script>
 import axios from "../../service/axios-api";
+import { mapActions } from "vuex";
 export default {
   name: "RegisterForm",
   data() {
@@ -120,11 +121,12 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["setUser"]),
     register() {
       axios
         .post("/register", { Login: this.username })
         .then(response => {
-          //TODO: store user state
+          this.setUser({ username: this.username });
           console.log(response);
           this.$router.push({ name: "Dashboard" });
         })

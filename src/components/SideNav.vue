@@ -10,32 +10,33 @@
             </span>
           </router-link>
         </li>
-        &nbsp; -->
+        &nbsp;-->
+        <li>
+          <div class="user">
+            <i class="fa fa-user fa-2x"></i>
+            <span class="nav-text">{{user.username}}</span>
+          </div>
+        </li>&nbsp;
+        <li></li>
         <li>
           <router-link :to="{ name: 'Dashboard' }">
             <i class="fa fa-columns fa-2x"></i>
-            <span class="nav-text">
-              Dashboard
-            </span>
+            <span class="nav-text">Dashboard</span>
           </router-link>
         </li>
         <li class="has-subnav">
           <router-link to="/login">
             <i class="fa fa-list fa-2x"></i>
-            <span class="nav-text">
-              Assigned Tasks
-            </span>
+            <span class="nav-text">Assigned Tasks</span>
           </router-link>
         </li>
       </ul>
 
       <ul class="logout">
         <li>
-          <a href="#">
+          <a @click="logout()">
             <i class="fa fa-power-off fa-2x"></i>
-            <span class="nav-text">
-              Logout
-            </span>
+            <span class="nav-text">Logout</span>
           </a>
         </li>
       </ul>
@@ -44,7 +45,18 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters, mapActions } from "vuex";
+export default {
+  name: "SideNav",
+  methods: {
+    ...mapActions(["removeUser"]),
+    logout() {
+      this.removeUser();
+      this.$router.push({ name: "Landing" });
+    }
+  },
+  computed: mapGetters(["user"])
+};
 </script>
 
 <style scoped>
@@ -183,6 +195,13 @@ nav.main-menu li.active > a,
   background: #e2e2e2;
   width: 100%;
   height: 100%;
+}
+.user i,
+.user span {
+  color: #fff;
+}
+.logout:hover {
+  cursor: pointer;
 }
 @font-face {
   font-family: "Titillium Web";
