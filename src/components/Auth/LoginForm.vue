@@ -101,8 +101,7 @@ export default {
       axios
         .post("/login", { Login: this.username })
         .then(response => {
-          this.setUser({ username: this.username });
-          console.log(response);
+          this.setUser({ username: this.username, token: response.data.token });
           this.$router.push({ name: "Dashboard" });
         })
         .catch(error => {

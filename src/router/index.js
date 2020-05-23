@@ -36,7 +36,7 @@ const routes = [
     component: Project,
   },
   {
-    path: "/project/:projectId/task/:id",
+    path: "/task/:id",
     name: "Task",
     component: Task,
   },

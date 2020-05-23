@@ -50,7 +50,7 @@
               </div>
               <div class="text-right">
                 <b-button class="btn-modal" @click="hideModal">Cancel</b-button>
-                <b-button class="btn-modal" variant="success"  @click="createProject">Cearte</b-button>
+                <b-button class="btn-modal" variant="success" @click="createProject">Cearte</b-button>
               </div>
             </b-form>
           </div>
@@ -68,22 +68,26 @@ export default {
   name: "ProjectsBar",
   data() {
     return {
-      name: '',
-      description: '',
-    }
+      name: "",
+      description: ""
+    };
   },
   methods: {
-    ...mapActions(['addProject']),
+    ...mapActions(["addProject"]),
     hideModal() {
       this.$refs["createProjectModal"].hide();
-      this.name = '';
-      this.description = '';
+      this.name = "";
+      this.description = "";
     },
     createProject() {
-        axios
+      axios
         .post("/projects", { name: this.name, description: this.description })
         .then(response => {
-          this.addProject({ id: response.data.id, name: response.data.name, description: response.data.description });
+          this.addProject({
+            id: response.data.id,
+            name: response.data.name,
+            description: response.data.description
+          });
           this.hideModal();
         })
         .catch(error => {

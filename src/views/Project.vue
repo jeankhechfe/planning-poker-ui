@@ -5,8 +5,8 @@
         <SideNav />
         <div class="projects">
           <div class="text-center"><h2 class="title-one">{{project.name}}</h2></div>
-          <EpicsBar />
-          <EpicsList v-bind:epics="epics" />
+          <TasksBar v-bind:project="project"/>
+          <TasksList v-bind:tasks="tasks" v-bind:project="project"/>
         </div>
       </div>
     </body>
@@ -16,73 +16,49 @@
 <script>
 // @ is an alias to /src
 import SideNav from "@/components/SideNav.vue";
-import EpicsBar from "@/components/EpicsBar";
-import EpicsList from "@/components/EpicsList";
-import axios from "./../service/axios-api"
+import TasksBar from "@/components/TasksBar";
+import TasksList from "@/components/TasksList";
+import axios from "../service/axios-api";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Body",
   components: {
     SideNav,
-    EpicsBar,
-    EpicsList,
+    TasksBar,
+    TasksList,
   },
+  computed: mapGetters(["tasks"]),
   created() {
     axios
     .get("/projects/"+this.$route.params.id)
     .then(response => {
       this.project = response.data
-      console.log(response);
     })
     .catch(error => {
       console.log(error);
     });
+    axios
+        .get("/tasks/project/"+this.$route.params.id)
+        .then(response => {
+          this.setTasks(response.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
   },
-  // TODO: use axios to get data
+  methods: {
+    ...mapActions(["setTasks"])
+  },
   data() {
     return {
       project: [],
-      epics: [
-        {
-          id: 1,
-          name: "First Epic",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
-          tasks: [
-            {
-              name: "task 1",
-              description:
-                "consecteturcon consectetur adipisicing elit. Eligendi non quis exercitatio sectetur adipisicing elit. Eligendi non quis exercitatio. Eligendi non quis exercitatio",
-              estimation: null,
-            },
-            {
-              name: "task 2",
-              description:
-                "consectetur adipisicing elit. Eligendi non quis exercitatio",
-              estimation: null,
-            },
-            {
-              name: "task 3",
-              description:
-                "consectetur adipisicing elit. Eligendi non quis exercitatio consectetur adipisicing elit. Eligendi non quis exercitatio consectetur adipisicing elit. Eligendi non quis exercitatio",
-              estimation: 11,
-            },
-            {
-              name: "task 4",
-              description:
-                "consectetur adipisicing elit. Eligendi non quis exercitatio",
-              estimation: null,
-            },
-          ],
-        },
-      ],
     };
   },
 };
 </script>
 
 <style scoped>
-
 .projects {
   overflow: hidden;
   min-height: 50px;

@@ -2,33 +2,28 @@
   <div class="container">
     <div class="row bar">
       <div class="col-md-6">
-        <input
-          class="form-control"
-          type="text"
-          placeholder="Search Epics..."
-          aria-label="Search"
-        />
+        <input class="form-control" type="text" placeholder="Search Tasks..." aria-label="Search" />
       </div>
       <div class="col-md-6">
         <b-button
           variant="primary"
-          v-b-modal.createEpicModal
+          v-b-modal.createTaskModal
           class="btn btn-success float-right"
-        >Create Epic</b-button>
-        <b-modal id="createEpicModal" ref="createEpicModal" hide-footer hide-header>
+        >Create Task</b-button>
+        <b-modal id="createTaskModal" ref="createTaskModal" hide-footer hide-header>
           <div>
-            <h3>Create New Epic</h3>
+            <h3>Create New Task</h3>
             <hr />
             <b-form>
               <div class="form-group row">
-                <label for="title" class="col-md-3 col-form-label text-md-right">Title</label>
+                <label for="name" class="col-md-3 col-form-label text-md-right">Name</label>
                 <div class="col-md-9">
                   <b-form-input
-                    id="title"
+                    id="name"
                     class="form-control"
-                    v-model="title"
-                    placeholder="Epic title"
-                    name="title"
+                    v-model="name"
+                    placeholder="Task name"
+                    name="name"
                     required
                   ></b-form-input>
                 </div>
@@ -40,7 +35,7 @@
                     id="description"
                     class="form-control"
                     v-model="description"
-                    placeholder="Enter epic description..."
+                    placeholder="Enter task description..."
                     rows="6"
                     max-rows="6"
                     name="description"
@@ -50,7 +45,7 @@
               </div>
               <div class="text-right">
                 <b-button class="btn-modal" @click="hideModal">Cancel</b-button>
-                <b-button class="btn-modal" variant="success"  @click="createEpic">Cearte</b-button>
+                <b-button class="btn-modal" variant="success" @click="createTask">Cearte</b-button>
               </div>
             </b-form>
           </div>
@@ -61,26 +56,55 @@
 </template>
 
 <script>
+import axios from "./../service/axios-api";
+import { mapActions } from "vuex";
+
 export default {
-  name: "EpicsBar",
+  name: "TasksBar",
   data() {
     return {
-      title: '',
-      description: '',
+      name: "",
+      description: ""
+    };
+  },
+  props: ["project"],
+  methods: {
+    ...mapActions(["addTask"]),
+    hideModal() {
+      this.name = '';
+      this.description = '';
+      this.$refs["createTaskModal"].hide();
+    },
+    createTask() {
+      axios
+        .post("/tasks", { 
+          name: this.name,
+          description: this.description,
+          estimation: 0,
+          AssignedUserId: this.$store.getters.user.token,
+          ProjectID: this.project.id
+         })
+        .then(response => {
+          // this.addTask({
+          //   id: response.data.id,
+          //   name: response.data.name,
+          //   description: response.data.description
+          // });
+          console.log(response)
+          this.hideModal();
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   },
-  methods: {
-    hideModal() {
-      this.$refs["createEpicModal"].hide();
-    },
-    createEpic() {
-        //TODO
-    }
-  }
 };
 </script>
 
 <style scoped>
+.container {
+  padding: 0;
+}
 .bar {
   background-color: #f6f6f6;
   padding: 15px 0;
