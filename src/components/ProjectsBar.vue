@@ -21,14 +21,14 @@
             <hr />
             <b-form>
               <div class="form-group row">
-                <label for="title" class="col-md-3 col-form-label text-md-right">Title</label>
+                <label for="name" class="col-md-3 col-form-label text-md-right">Name</label>
                 <div class="col-md-9">
                   <b-form-input
-                    id="title"
+                    id="name"
                     class="form-control"
-                    v-model="title"
-                    placeholder="Project title"
-                    name="title"
+                    v-model="name"
+                    placeholder="Project name"
+                    name="name"
                     required
                   ></b-form-input>
                 </div>
@@ -61,20 +61,34 @@
 </template>
 
 <script>
+import axios from "../service/axios-api";
+import { mapActions } from "vuex";
+
 export default {
   name: "ProjectsBar",
   data() {
     return {
-      title: '',
+      name: '',
       description: '',
     }
   },
   methods: {
+    ...mapActions(['addProject']),
     hideModal() {
       this.$refs["createProjectModal"].hide();
+      this.name = '';
+      this.description = '';
     },
     createProject() {
-        //TODO
+        axios
+        .post("/projects", { name: this.name, description: this.description })
+        .then(response => {
+          this.addProject({ id: response.data.id, name: response.data.name, description: response.data.description });
+          this.hideModal();
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
 };

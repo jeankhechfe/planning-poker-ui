@@ -17,6 +17,8 @@
 import ProjectsBar from "@/components/ProjectsBar";
 import ProjectsList from "@/components/ProjectsList";
 import SideNav from "@/components/SideNav";
+import { mapGetters, mapActions } from "vuex";
+import axios from "../service/axios-api";
 
 export default {
   name: "Body",
@@ -25,37 +27,20 @@ export default {
     ProjectsBar,
     ProjectsList,
   },
-  // TODO: use axios to get data
-  data() {
-    return {
-      projects: [
-        {
-          id: 1,
-          name: "Foo",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
-        },
-        {
-          id: 2,
-          name: "Foo",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
-        },
-        {
-          id: 3,
-          name: "Foo",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
-        },
-        {
-          id: 4,
-          name: "Foo",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
-        },
-      ],
-    };
+  computed: mapGetters(["projects"]),
+  methods: {
+    ...mapActions(["setProjects"])
   },
+  created() {
+    axios
+        .get("/projects")
+        .then(response => {
+          this.setProjects(response.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+  }
 };
 </script>
 
