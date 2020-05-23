@@ -90,7 +90,7 @@ nav.main-menu.expanded {
 .main-menu {
   background: #43484e;
   border-right: 1px solid #e5e5e5;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;

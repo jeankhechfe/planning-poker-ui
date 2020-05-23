@@ -4,8 +4,7 @@
       <div>
         <SideNav />
         <div class="projects">
-          <div class="text-center"><h2 class="title-one">Project Foo</h2></div>
-          <!-- TODO: get project name dynamically -->
+          <div class="text-center"><h2 class="title-one">{{project.name}}</h2></div>
           <EpicsBar />
           <EpicsList v-bind:epics="epics" />
         </div>
@@ -19,6 +18,7 @@
 import SideNav from "@/components/SideNav.vue";
 import EpicsBar from "@/components/EpicsBar";
 import EpicsList from "@/components/EpicsList";
+import axios from "./../service/axios-api"
 
 export default {
   name: "Body",
@@ -27,9 +27,21 @@ export default {
     EpicsBar,
     EpicsList,
   },
+  created() {
+    axios
+    .get("/projects/"+this.$route.params.id)
+    .then(response => {
+      this.project = response.data
+      console.log(response);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  },
   // TODO: use axios to get data
   data() {
     return {
+      project: [],
       epics: [
         {
           id: 1,
