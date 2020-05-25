@@ -54,7 +54,7 @@ export default {
     ...mapActions(["removeUser"]),
     logout() {
       this.removeUser();
-      axios.defaults.headers.common["Auth-Token"] = null;
+      axios.defaults.headers.common["Authorization"] = null;
       this.$router.push({ name: "Landing" });
     }
   },
