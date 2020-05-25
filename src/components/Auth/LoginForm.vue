@@ -102,6 +102,7 @@ export default {
         .post("/login", { Login: this.username })
         .then(response => {
           this.setUser({ username: this.username, token: response.data.token });
+          axios.defaults.headers.common["Authorization"] = response.data.token;
           this.$router.push({ name: "Dashboard" });
         })
         .catch(error => {
