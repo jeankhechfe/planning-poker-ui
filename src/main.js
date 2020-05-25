@@ -8,11 +8,6 @@ Vue.config.productionTip = false;
 
 Vue.prototype.$http = Axios;
 
-const token = localStorage.getItem("token");
-if (token) {
-  Vue.prototype.$http.defaults.headers.common["Authorization"] = token;
-}
-
 //Bootstrap
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";
