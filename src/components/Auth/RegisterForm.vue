@@ -127,7 +127,7 @@ export default {
         .post("/register", { Login: this.username })
         .then(response => {
           this.setUser({ username: this.username, token: response.data.token });
-          this.$router.push({ name: "Dashboard" });
+          this.$router.push({ name: "Login" });
         })
         .catch(error => {
           if (!error.response) {
