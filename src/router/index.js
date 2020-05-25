@@ -61,10 +61,8 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (user.state.user.token) {
-      console.log(user.state.user.token);
       next();
     } else {
-      console.log("user not logged in");
       next("/login");
     }
   } else {
