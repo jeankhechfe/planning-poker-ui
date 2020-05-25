@@ -85,12 +85,13 @@ export default {
           ProjectID: this.project.id
          })
         .then(response => {
-          // this.addTask({
-          //   id: response.data.id,
-          //   name: response.data.name,
-          //   description: response.data.description
-          // });
-          console.log(response)
+          this.addTask({
+            id: response.data.id,
+            name: response.data.name,
+            description: response.data.description,
+            estimation: 0,
+            assignee: response.data.assignee,
+          });
           this.hideModal();
         })
         .catch(error => {
