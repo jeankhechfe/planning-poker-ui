@@ -6,6 +6,7 @@ import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Project from "../views/Project.vue";
 import Task from "../views/Task.vue";
+import user from "../store/modules/user";
 
 Vue.use(VueRouter);
 
@@ -14,6 +15,9 @@ const routes = [
     path: "/dashboard",
     name: "Dashboard",
     component: Dashboard,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/",
@@ -34,11 +38,17 @@ const routes = [
     path: "/project/:id",
     name: "Project",
     component: Project,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/task/:id",
     name: "Task",
     component: Task,
+    meta: {
+      requiresAuth: true,
+    },
   },
 ];
 
@@ -46,6 +56,20 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (user.state.user.token) {
+      console.log(user.state.user.token);
+      next();
+    } else {
+      console.log("user not logged in");
+      next("/login");
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;
