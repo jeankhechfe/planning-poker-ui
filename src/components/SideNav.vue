@@ -25,7 +25,7 @@
           </router-link>
         </li>
         <li class="has-subnav">
-          <router-link to="/login">
+          <router-link :to="{ name: 'Dashboard' }">
             <i class="fa fa-list fa-2x"></i>
             <span class="nav-text">Assigned Tasks</span>
           </router-link>
@@ -46,12 +46,15 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import axios from "../service/axios-api";
+
 export default {
   name: "SideNav",
   methods: {
     ...mapActions(["removeUser"]),
     logout() {
       this.removeUser();
+      axios.defaults.headers.common["Auth-Token"] = null;
       this.$router.push({ name: "Landing" });
     }
   },
