@@ -31,4 +31,4 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Netlify
-https://planningpokerapp.netlify.app/
+https://planningpokerui-master.netlify.app/
