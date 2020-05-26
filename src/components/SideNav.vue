@@ -81,7 +81,7 @@ export default {
 .sidenav {
   float: left;
   width: 50px;
-  margin: 10px;
+  margin: 5px;
   margin-top: 30px;
 }
 .main-menu:hover,
