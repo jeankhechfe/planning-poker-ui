@@ -2,10 +2,10 @@
   <section id="team" class="pb-5">
     <div class="container">
       <h5 class="section-title h1">OUR TEAM</h5>
-      <div class="container" style="display:flex">
-        <div
+      <div class="container">
+        <div class="row">
+          <div
           class="col-xs-12 col-sm-6 col-md-3"
-          style="display:flex"
           v-for="teamMember in teamMembers"
           v-bind:key="teamMember.id"
         >
@@ -24,7 +24,7 @@
               </div>
               <div class="backside">
                 <div class="card">
-                  <div class="card-body text-center mt-4">
+                  <div class="card-body text-center">
                     <h4 class="card-title">{{ teamMember.name }}</h4>
                     <p class="card-text">{{teamMember.detailed_title}}</p>
                   </div>
@@ -32,6 +32,7 @@
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
@@ -80,27 +81,12 @@ export default {
   margin-top: 100px;
 }
 
-.btn-primary:hover,
-.btn-primary:focus {
-  background-color: #b11e22;
-  border-color: #b11e22;
-  box-shadow: none;
-  outline: none;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #b11e22;
-  border-color: #b11e22;
-}
-
 section {
   padding: 120px 0;
 }
 
 section .section-title {
   text-align: center;
-  color: #b11e22;
   margin-bottom: 50px;
   text-transform: uppercase;
 }
@@ -108,6 +94,7 @@ section .section-title {
 #team .card {
   border: none;
   background: #ffffff;
+  border-radius: 0;
 }
 
 .image-flip:hover .backside,
@@ -117,7 +104,6 @@ section .section-title {
   -o-transform: rotateY(0deg);
   -ms-transform: rotateY(0deg);
   transform: rotateY(0deg);
-  border-radius: 0.25rem;
 }
 
 .image-flip:hover .frontside,
@@ -147,12 +133,16 @@ section .section-title {
   -ms-transform: rotateY(0deg);
   z-index: 2;
   margin-bottom: 30px;
+  -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+  -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+  box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
 }
 
 .backside {
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
   background: white;
   -webkit-transform: rotateY(-180deg);
   -moz-transform: rotateY(-180deg);

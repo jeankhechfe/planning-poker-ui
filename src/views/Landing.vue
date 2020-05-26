@@ -17,9 +17,5 @@ export default {
     AboutContent,
     OurTeam,
   },
-  created() {
-    // TODO: check if user is registered then redirect to dashboard
-    // this.$router.push({ name: "Dashboard" });
-  },
 };
 </script>
