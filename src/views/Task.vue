@@ -1,33 +1,90 @@
 <template>
-  <div>
-    <body>
-      <div>
-        <div class="sidenav container">
-          <SideNav />
+<div>
+  <body>
+    <div>
+      <SideNav />
+      <div class="task">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="text-center">
+                <h2 class="title-one">{{task.name}}</h2>
+                <p>{{task.description}}</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="dashboard">
-          <VotingCards />
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8">
+              <VotingCards />
+              <CommentSection />
+            </div>
+            <div class="col-md-4">
+              <OtherVotes v-bind:estimations="estimations"/>
+            </div>
+          </div>
         </div>
       </div>
-    </body>
-  </div>
+    </div>
+  </body>
+</div>
 </template>
 
 <script>
 // @ is an alias to /src
 import SideNav from "@/components/SideNav.vue";
 import VotingCards from "@/components/VotingCards";
+import CommentSection from "@/components/CommentSection";
+import OtherVotes from "@/components/OtherVotes";
+import axios from "../service/axios-api";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Body",
   components: {
     SideNav,
     VotingCards,
+    CommentSection,
+    OtherVotes
   },
+  computed: mapGetters(["estimations"]),
+  created() {
+    axios
+      .get("/tasks/" + this.$route.params.id)
+      .then(response => {
+        this.task = response.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    axios
+      .get("/tasks/" + this.$route.params.id + "/estimations")
+      .then(response => {
+        this.setEstimations(response.data);
+        console.log(this.estimations);
+        console.log(this.$store.getters.estimations);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  },
+  methods: {
+    ...mapActions(["setEstimations"])
+  },
+  data() {
+    return {
+      task: []
+    };
+  }
 };
 </script>
 
 <style scoped>
+.task {
+  overflow: hidden;
+  min-height: 50px;
+}
 .title-one {
   color: #666666;
   display: inline-block;
