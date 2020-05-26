@@ -1,26 +1,22 @@
 <template>
-  <div class="text-center">
-          <router-link
-            class="primary-btn"
-            :to="{ name: 'Login' }"
-            >Login</router-link
-          >
-          <router-link
-            class="primary-btn"
-            :to="{ name: 'Register' }"
-            >Register</router-link
-          >
+  <div class="container" style="margin-top:100px">
+    <div class="text-center">
+      <h5>Sign up now for a free account or if have already an account you can login using the buttons below;</h5>
+      <div style="margin-top:30px">
+        <router-link class="primary-btn" :to="{ name: 'Login' }">Login</router-link>
+        <router-link class="primary-btn" :to="{ name: 'Register' }">Register</router-link>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "RegisterAndLoginBtns",
+  name: "RegisterAndLoginBtns"
 };
 </script>
 
 <style scoped>
-
 .primary-btn {
   text-decoration: none;
   text-transform: uppercase;
