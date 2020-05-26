@@ -23,7 +23,7 @@ export default {
 <style scoped>
 .col-md-6 {
   background-color: #eee;
-  padding: 15px 0 30px 0;
+  padding: 15px 10px 30px 10px;
   -webkit-box-shadow: 3px 3px 5px -3px rgb(158, 158, 158);
   -moz-box-shadow: 3px 3px 5px -3px rgb(158, 158, 158);
   box-shadow: 3px 3px 5px -3px rgb(158, 158, 158);
