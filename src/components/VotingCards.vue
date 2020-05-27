@@ -20,14 +20,20 @@
       <button type="button" class="vote-btn" @click="estimate(13)">
         13 points
       </button>
-      <button type="button" class="vote-btn" @click="estimate(21)">
-        21 points
+      <button type="button" class="vote-btn" @click="estimate(20)">
+        20 points
       </button>
-      <button type="button" class="vote-btn" @click="estimate(34)">
-        34 points
+      <button type="button" class="vote-btn" @click="estimate(40)">
+        40 points
       </button>
-      <button type="button" class="vote-btn" @click="estimate(55)">
-        55 points
+      <button type="button" class="vote-btn" @click="estimate(100)">
+        100 points
+      </button>
+      <button type="button" class="vote-btn" @click="estimate(99999)">
+        Infinity
+      </button>
+      <button type="button" class="vote-btn" @click="estimate(123456)">
+        ?
       </button>
     </div>
     <div v-show="isVoted" style="margin-top:30px">
@@ -59,7 +65,14 @@ export default {
           response.data.forEach((obj) => {
             if (this.$store.getters.user.token) {
               this.isVoted = true;
-              this.user_estimation = obj.estimation;
+              if (obj.estimation == 99999) {
+                this.user_estimation = "INFINITY";
+              } else if (obj.estimation == 123456) {
+                this.user_estimation = "?";
+              } else {
+                this.user_estimation = obj.estimation;
+              }
+
               console.log(JSON.parse(obj));
             }
           });
