@@ -3,6 +3,9 @@
     <h3>Comments</h3>
 
     <div class="actionBox">
+      <div v-if="comments == null">
+        <h6>There are no comments yet...</h6>
+      </div>
       <ul class="commentList">
         <li v:v-for="(comment, index) in comments" :key="index">
           <div class="commenterImage">
@@ -33,17 +36,13 @@ export default {
   name: "CommentSection",
   data() {
     return {
-      isVoted: false,
-      comments: [],
+      comments: null,
     };
   },
-
   created() {
     axios
       .get("/tasks/" + this.$route.params.id + "/comments")
       .then((response) => {
-        // TODO: push data to store
-        console.log(response);
         if (response.status == 200) {
           this.comments = response.data;
         }

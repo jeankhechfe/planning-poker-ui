@@ -5,7 +5,10 @@
       <h6>There are No previouse votes</h6>
     </div>
     <div v-for="estimation in estimations" v-bind:key="estimation.id">
-      <p>{{estimation.user.login}}: <strong>{{estimation.estimation}}</strong></p>
+      <p>
+        {{ estimation.user.login }}:
+        <strong>{{ estimation.estimation }}</strong>
+      </p>
     </div>
   </div>
 </template>
@@ -20,7 +23,7 @@ export default {
   //   axios
   //     .get("/tasks/" + this.$route.params.id + "/estimations")
   //     .then(response => {
-  //       this.estimations = response.data; 
+  //       this.estimations = response.data;
   //       console.log(response);
   //     })
   //     .catch(error => {
@@ -28,9 +31,9 @@ export default {
   //     });
   // },
   // data() {
-    // return {
-      // estimations: null
-    // }
+  // return {
+  // estimations: null
+  // }
   // }
 };
 </script>

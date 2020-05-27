@@ -1,34 +1,34 @@
 <template>
-<div>
-  <body>
-    <div>
-      <SideNav />
-      <div class="task">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8">
-              <div class="text-center">
-                <h2 class="title-one">{{task.name}}</h2>
-                <p>{{task.description}}</p>
+  <div>
+    <body>
+      <div>
+        <SideNav />
+        <div class="task">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="text-center">
+                  <h2 class="title-one">{{ task.name }}</h2>
+                  <p>{{ task.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8">
+                <VotingCards />
+                <CommentSection />
+              </div>
+              <div class="col-md-4">
+                <OtherVotes v-bind:estimations="estimations" />
               </div>
             </div>
           </div>
         </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8">
-              <VotingCards />
-              <CommentSection />
-            </div>
-            <div class="col-md-4">
-              <OtherVotes v-bind:estimations="estimations"/>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
-  </body>
-</div>
+    </body>
+  </div>
 </template>
 
 <script>
@@ -46,37 +46,39 @@ export default {
     SideNav,
     VotingCards,
     CommentSection,
-    OtherVotes
+    OtherVotes,
   },
   computed: mapGetters(["estimations"]),
   created() {
     axios
       .get("/tasks/" + this.$route.params.id)
-      .then(response => {
+      .then((response) => {
         this.task = response.data;
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
     axios
       .get("/tasks/" + this.$route.params.id + "/estimations")
-      .then(response => {
-        this.setEstimations(response.data);
-        console.log(this.estimations);
-        console.log(this.$store.getters.estimations);
+      .then((response) => {
+        if (response.status == 200) {
+          this.setEstimations(response.data);
+          console.log(this.estimations);
+          console.log(this.$store.getters.estimations);
+        }
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   },
   methods: {
-    ...mapActions(["setEstimations"])
+    ...mapActions(["setEstimations"]),
   },
   data() {
     return {
-      task: []
+      task: [],
     };
-  }
+  },
 };
 </script>
 
