@@ -44,7 +44,6 @@ export default {
   data() {
     return {
       isVoted: false,
-      estimations: [],
       user_estimation: 0,
     };
   },
