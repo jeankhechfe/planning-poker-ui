@@ -14,27 +14,22 @@
 </template>
 
 <script>
-// import axios from "./../service/axios-api";
+import axios from "./../service/axios-api";
 
 export default {
   name: "OtherVotes",
   props: ["estimations"],
-  // created() {
-  //   axios
-  //     .get("/tasks/" + this.$route.params.id + "/estimations")
-  //     .then(response => {
-  //       this.estimations = response.data;
-  //       console.log(response);
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // },
-  // data() {
-  // return {
-  // estimations: null
-  // }
-  // }
+  created() {
+    axios
+      .get("/tasks/" + this.$route.params.id + "/estimations")
+      .then(response => {
+        this.estimations = response.data;
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  },
 };
 </script>
 
