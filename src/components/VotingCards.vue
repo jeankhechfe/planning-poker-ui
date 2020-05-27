@@ -2,15 +2,36 @@
   <div class="container">
     <h2>Pick a Vote</h2>
     <div class="btn-group">
-      <button type="button" class="vote-btn" @click="estimate(1)">1 points</button>
-      <button type="button" class="vote-btn" @click="estimate(2)">2 points</button>
-      <button type="button" class="vote-btn" @click="estimate(3)">3 points</button>
-      <button type="button" class="vote-btn" @click="estimate(5)">5 points</button>
-      <button type="button" class="vote-btn" @click="estimate(8)">8 points</button>
-      <button type="button" class="vote-btn" @click="estimate(13)">13 points</button>
-      <button type="button" class="vote-btn" @click="estimate(21)">21 points</button>
-      <button type="button" class="vote-btn" @click="estimate(34)">34 points</button>
-      <button type="button" class="vote-btn" @click="estimate(55)">55 points</button>
+      <button type="button" class="vote-btn" @click="estimate(1)">
+        1 points
+      </button>
+      <button type="button" class="vote-btn" @click="estimate(2)">
+        2 points
+      </button>
+      <button type="button" class="vote-btn" @click="estimate(3)">
+        3 points
+      </button>
+      <button type="button" class="vote-btn" @click="estimate(5)">
+        5 points
+      </button>
+      <button type="button" class="vote-btn" @click="estimate(8)">
+        8 points
+      </button>
+      <button type="button" class="vote-btn" @click="estimate(13)">
+        13 points
+      </button>
+      <button type="button" class="vote-btn" @click="estimate(21)">
+        21 points
+      </button>
+      <button type="button" class="vote-btn" @click="estimate(34)">
+        34 points
+      </button>
+      <button type="button" class="vote-btn" @click="estimate(55)">
+        55 points
+      </button>
+    </div>
+    <div v-show="isVoted" style="margin-top:30px">
+      <h2>You voted : {{ user_estimation }}</h2>
     </div>
   </div>
 </template>
@@ -20,28 +41,60 @@ import axios from "./../service/axios-api";
 
 export default {
   name: "VotingCards",
+  data() {
+    return {
+      isVoted: false,
+      user_estimation: 0,
+    };
+  },
+
+  created() {
+    axios
+      .get("/tasks/" + this.$route.params.id + "/estimations")
+      .then((response) => {
+        // TODO: push data to store
+        console.log(response);
+        if (response.status == 200) {
+          this.estimations = response.data;
+          response.data.forEach((obj) => {
+            if (this.$store.getters.user.token) {
+              this.isVoted = true;
+              this.user_estimation = obj.estimation;
+              console.log(JSON.parse(obj));
+            }
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
   methods: {
     estimate(estimation) {
       console.log({
-          estimation: estimation,
-          userId: this.$store.getters.user.token,
-          taskId: this.$route.params.id
-        })
+        user_estimation: estimation,
+        userId: this.$store.getters.user.token,
+        taskId: this.$route.params.id,
+      });
       axios
         .post("/tasks/" + this.$route.params.id + "/estimations", {
           estimation: estimation,
           userId: this.$store.getters.user.token,
-          taskId: this.$route.params.id
+          taskId: this.$route.params.id,
         })
-        .then(response => {
+        .then((response) => {
           // TODO: push data to store
           console.log(response);
+          if (response.status == 200) {
+            this.isVoted = true;
+            this.user_estimation = estimation;
+          }
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
