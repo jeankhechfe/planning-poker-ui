@@ -20,14 +20,17 @@
       <button type="button" class="vote-btn" @click="estimate(13)">
         13 points
       </button>
-      <button type="button" class="vote-btn" @click="estimate(20)">
-        20 points
+      <button type="button" class="vote-btn" @click="estimate(21)">
+        21 points
       </button>
-      <button type="button" class="vote-btn" @click="estimate(40)">
-        40 points
+      <button type="button" class="vote-btn" @click="estimate(34)">
+        34 points
       </button>
-      <button type="button" class="vote-btn" @click="estimate(100)">
-        100 points
+      <button type="button" class="vote-btn" @click="estimate(55)">
+        55 points
+      </button>
+      <button type="button" class="vote-btn" @click="estimate(89)">
+        89 points
       </button>
       <button type="button" class="vote-btn" @click="estimate(99999)">
         Infinity
