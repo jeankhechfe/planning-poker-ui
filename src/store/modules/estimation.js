@@ -3,7 +3,7 @@ const state = {
 };
 
 const getters = {
-    tasks: (state) => state.estimations
+    estimations: (state) => state.estimations
 };
 
 const actions = {
