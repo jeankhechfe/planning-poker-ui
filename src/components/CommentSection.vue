@@ -7,20 +7,20 @@
         <h6>There are no comments yet...</h6>
       </div>
       <ul class="commentList">
-        <li v:v-for="(comment, index) in comments" :key="index">
+        <li v-for="comment in comments" :key="comment.id">
           <div class="commenterImage">
             <img src="@/assets/poker-logo.png" />
           </div>
           <div class="commentText">
-            <h4>Jess</h4>
-            <p class="">Hello this is a test comment.</p>
-            <span class="date sub-text">on March 5th, 2014</span>
+            <h4>{{comment.user.login}}</h4>
+            <p class>{{comment.text}}</p>
+            <span class="date sub-text">{{comment.created}}</span>
           </div>
         </li>
       </ul>
-      <form class="form-inline" role="form">
+      <form class="form-inline" role="form" @submit.prevent="postComment">
         <div class="form-group">
-          <input class="form-control" type="text" placeholder="Your comment" />
+          <input class="form-control" type="text" v-model="newComment" placeholder="Your comment" />
         </div>
         <div class="form-group">
           <button class="vote-btn">Add</button>
@@ -36,21 +36,38 @@ export default {
   name: "CommentSection",
   data() {
     return {
-      comments: null,
+      newComment: "",
+      comments: null
     };
+  },
+  methods: {
+    postComment() {
+      axios
+        .post("/tasks/" + this.$route.params.id + "/comments", {
+          text: this.newComment,
+          taskId: this.$route.params.id,
+          userId: this.$store.getters.user.token
+        })
+        .then(response => {
+          if (response.status == 200) {
+            this.comments.push(response.data);
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   },
   created() {
     axios
       .get("/tasks/" + this.$route.params.id + "/comments")
-      .then((response) => {
-        if (response.status == 200) {
-          this.comments = response.data;
-        }
+      .then(response => {
+        this.comments = response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
-  },
+  }
 };
 </script>
 
@@ -88,10 +105,17 @@ export default {
 }
 .commentBox .form-group:nth-child(2),
 .actionBox .form-group:nth-child(2) {
-  width: 18%;
+  width: 20%;
 }
 .actionBox .form-group * {
   width: 100%;
+  border-radius: 0;
+}
+
+.actionBox .form-control:focus {
+  border-color: #cf142b;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .taskDescription {
   margin-top: 10px 0;
@@ -138,6 +162,7 @@ export default {
   height: 37px;
   background-color: rgba(255, 255, 255, 0);
   border-radius: 0;
+  margin-left: 20px;
 }
 .vote-btn:hover,
 .vote-btn:focus {
