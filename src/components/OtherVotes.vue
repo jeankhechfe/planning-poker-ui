@@ -22,11 +22,18 @@ export default {
   created() {
     axios
       .get("/tasks/" + this.$route.params.id + "/estimations")
-      .then(response => {
+      .then((response) => {
         this.estimations = response.data;
+        this.estimations.forEach((obj) => {
+          if (obj.estimation == 99999) {
+            obj.estimation = "INFINITY";
+          } else if (obj.estimation == 123456) {
+            obj.estimation = "?";
+          }
+        });
         console.log(response);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   },

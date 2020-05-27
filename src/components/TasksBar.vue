@@ -2,21 +2,34 @@
   <div class="container">
     <div class="row bar">
       <div class="col-md-6">
-        <input class="form-control" type="text" placeholder="Search Tasks..." aria-label="Search" />
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Search Tasks..."
+          aria-label="Search"
+        />
       </div>
       <div class="col-md-6">
         <b-button
           variant="primary"
           v-b-modal.createTaskModal
           class="btn btn-success float-right"
-        >Create Task</b-button>
-        <b-modal id="createTaskModal" ref="createTaskModal" hide-footer hide-header>
+          >Create Task</b-button
+        >
+        <b-modal
+          id="createTaskModal"
+          ref="createTaskModal"
+          hide-footer
+          hide-header
+        >
           <div>
             <h3>Create New Task</h3>
             <hr />
             <b-form>
               <div class="form-group row">
-                <label for="name" class="col-md-3 col-form-label text-md-right">Name</label>
+                <label for="name" class="col-md-3 col-form-label text-md-right"
+                  >Name</label
+                >
                 <div class="col-md-9">
                   <b-form-input
                     id="name"
@@ -29,7 +42,11 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="description" class="col-md-3 col-form-label text-md-right">Description</label>
+                <label
+                  for="description"
+                  class="col-md-3 col-form-label text-md-right"
+                  >Description</label
+                >
                 <div class="col-md-9">
                   <b-form-textarea
                     id="description"
@@ -45,7 +62,12 @@
               </div>
               <div class="text-right">
                 <b-button class="btn-modal" @click="hideModal">Cancel</b-button>
-                <b-button class="btn-modal" variant="success" @click="createTask">Cearte</b-button>
+                <b-button
+                  class="btn-modal"
+                  variant="success"
+                  @click="createTask"
+                  >Create</b-button
+                >
               </div>
             </b-form>
           </div>
@@ -64,27 +86,27 @@ export default {
   data() {
     return {
       name: "",
-      description: ""
+      description: "",
     };
   },
   props: ["project"],
   methods: {
     ...mapActions(["addTask"]),
     hideModal() {
-      this.name = '';
-      this.description = '';
+      this.name = "";
+      this.description = "";
       this.$refs["createTaskModal"].hide();
     },
     createTask() {
       axios
-        .post("/tasks", { 
+        .post("/tasks", {
           name: this.name,
           description: this.description,
           estimation: 0,
           AssignedUserId: this.$store.getters.user.token,
-          ProjectID: this.project.id
-         })
-        .then(response => {
+          ProjectID: this.project.id,
+        })
+        .then((response) => {
           this.addTask({
             id: response.data.id,
             name: response.data.name,
@@ -94,10 +116,10 @@ export default {
           });
           this.hideModal();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
-    }
+    },
   },
 };
 </script>
