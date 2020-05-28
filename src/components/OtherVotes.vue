@@ -15,15 +15,17 @@
 
 <script>
 import axios from "./../service/axios-api";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "OtherVotes",
-  props: ["estimations"],
+  // props: ["estimations"],
+  computed: mapGetters(["estimations"]),
   created() {
     axios
       .get("/tasks/" + this.$route.params.id + "/estimations")
       .then((response) => {
-        this.estimations = response.data;
+        this.setEstimations(response.data);
         this.estimations.forEach((obj) => {
           if (obj.estimation == 99999) {
             obj.estimation = "INFINITY";
@@ -36,6 +38,9 @@ export default {
         console.log(error);
       });
   },
+  methods: {
+    ...mapActions(["setEstimations"])
+  }
 };
 </script>
 
