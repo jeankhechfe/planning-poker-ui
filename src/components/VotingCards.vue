@@ -62,7 +62,6 @@ export default {
       .get("/tasks/" + this.$route.params.id + "/estimations")
       .then((response) => {
         // TODO: push data to store
-        console.log(response);
         if (response.status == 200) {
           this.estimations = response.data;
           response.data.forEach((obj) => {
@@ -75,8 +74,6 @@ export default {
               } else {
                 this.user_estimation = obj.estimation;
               }
-
-              console.log(JSON.parse(obj));
             }
           });
         }
@@ -87,11 +84,6 @@ export default {
   },
   methods: {
     estimate(estimation) {
-      console.log({
-        user_estimation: estimation,
-        userId: this.$store.getters.user.token,
-        taskId: this.$route.params.id,
-      });
       axios
         .post("/tasks/" + this.$route.params.id + "/estimations", {
           estimation: estimation,
@@ -99,11 +91,10 @@ export default {
           taskId: this.$route.params.id,
         })
         .then((response) => {
-          // TODO: push data to store
-          console.log(response);
           if (response.status == 200) {
             this.isVoted = true;
             this.user_estimation = estimation;
+            this.$emit('add-estimation', response.data);
           }
         })
         .catch((error) => {

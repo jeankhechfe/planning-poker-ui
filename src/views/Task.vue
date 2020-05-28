@@ -17,7 +17,7 @@
           <div class="container">
             <div class="row">
               <div class="col-md-8">
-                <VotingCards />
+                <VotingCards v-on:add-estimation="add_estimation" />
                 <CommentSection />
               </div>
               <div class="col-md-4">
@@ -63,8 +63,6 @@ export default {
       .then((response) => {
         if (response.status == 200) {
           this.setEstimations(response.data);
-          console.log(this.estimations);
-          console.log(this.$store.getters.estimations);
         }
       })
       .catch((error) => {
@@ -72,7 +70,16 @@ export default {
       });
   },
   methods: {
-    ...mapActions(["setEstimations"]),
+    ...mapActions(["setEstimations", "addEstimation"]),
+    add_estimation(newEstimation) {
+      var isVoted = false;
+      this.estimations.forEach(estimation => {
+        if(estimation.user.login == this.$store.getters.user.username) 
+          isVoted = true;
+      });
+      if (!isVoted)
+        this.addEstimation(newEstimation);
+    }
   },
   data() {
     return {
