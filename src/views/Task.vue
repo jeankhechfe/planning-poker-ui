@@ -72,13 +72,9 @@ export default {
   methods: {
     ...mapActions(["setEstimations", "addEstimation"]),
     add_estimation(newEstimation) {
-      var isVoted = false;
-      this.estimations.forEach(estimation => {
-        if(estimation.user.login == this.$store.getters.user.username) 
-          isVoted = true;
-      });
-      if (!isVoted)
-        this.addEstimation(newEstimation);
+      const index = this.estimations.findIndex(e => e.user.login == this.$store.getters.user.username);
+      this.estimations.splice(index, 1);
+      this.addEstimation(newEstimation);
     }
   },
   data() {
