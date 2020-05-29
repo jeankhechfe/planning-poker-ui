@@ -61,11 +61,10 @@ export default {
     axios
       .get("/tasks/" + this.$route.params.id + "/estimations")
       .then((response) => {
-        // TODO: push data to store
         if (response.status == 200) {
           this.estimations = response.data;
           response.data.forEach((obj) => {
-            if (this.$store.getters.user.token) {
+            if (this.$store.getters.user.username == obj.user.login) {
               this.isVoted = true;
               if (obj.estimation == 99999) {
                 this.user_estimation = "INFINITY";
@@ -76,6 +75,7 @@ export default {
               }
             }
           });
+          this.$emit('set-Voted',this.isVoted);
         }
       })
       .catch((error) => {
@@ -93,6 +93,7 @@ export default {
         .then((response) => {
           if (response.status == 200) {
             this.isVoted = true;
+            this.$emit('set-Voted',this.isVoted);
             this.user_estimation = estimation;
             this.$emit('add-estimation', response.data);
           }

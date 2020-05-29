@@ -7,7 +7,8 @@
     <div v-for="estimation in estimations" v-bind:key="estimation.id">
       <p>
         {{ estimation.user.login }}:
-        <strong>{{ estimation.estimation }}</strong>
+        <strong v-show="isVoted">{{ estimation.estimation }}</strong>
+        <strong v-show="!isVoted">*</strong>
       </p>
     </div>
   </div>
@@ -19,8 +20,8 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "OtherVotes",
-  // props: ["estimations"],
   computed: mapGetters(["estimations"]),
+  props: ["isVoted"],
   created() {
     axios
       .get("/tasks/" + this.$route.params.id + "/estimations")
@@ -32,6 +33,7 @@ export default {
           } else if (obj.estimation == 123456) {
             obj.estimation = "?";
           }
+          // if(obj.user.login == this.$store.getters.user.username) { this.isVoted = true; }
         });
       })
       .catch((error) => {
