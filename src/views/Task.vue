@@ -17,11 +17,11 @@
           <div class="container">
             <div class="row">
               <div class="col-md-8">
-                <VotingCards v-on:add-estimation="add_estimation" />
+                <VotingCards v-on:add-estimation="add_estimation" v-on:set-Voted="set_Voted" />
                 <CommentSection />
               </div>
               <div class="col-md-4">
-                <OtherVotes v-bind:estimations="estimations" />
+                <OtherVotes v-bind:estimations="estimations" v-bind:isVoted="isVoted" />
               </div>
             </div>
           </div>
@@ -73,13 +73,17 @@ export default {
     ...mapActions(["setEstimations", "addEstimation"]),
     add_estimation(newEstimation) {
       const index = this.estimations.findIndex(e => e.user.login == this.$store.getters.user.username);
-      this.estimations.splice(index, 1);
+      if(index > -1) { this.estimations.splice(index, 1); }
       this.addEstimation(newEstimation);
+    },
+    set_Voted(x) {
+      this.isVoted = x;
     }
   },
   data() {
     return {
       task: [],
+      isVoted: false,
     };
   },
 };
