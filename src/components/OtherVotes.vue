@@ -5,10 +5,11 @@
       <h6>There are No previouse votes</h6>
     </div>
     <div v-for="estimation in estimations" v-bind:key="estimation.id">
-      <p>
+      <p class="vote-text">
         {{ estimation.user.login }}:
         <strong v-show="isVoted">{{ estimation.estimation }}</strong>
         <strong v-show="!isVoted">*</strong>
+        <br>{{new Date(estimation.updated).toLocaleString()}}
       </p>
     </div>
   </div>
@@ -53,5 +54,10 @@ export default {
   margin-bottom: 30px;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   transition: all 0.5s ease 0s;
+}
+.vote-text {
+  padding: 2px 10px;
+  background-color: #d6d8db;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 </style>
