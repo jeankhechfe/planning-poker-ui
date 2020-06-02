@@ -1,16 +1,26 @@
 <template>
-  <div>
-    <body>
-      <div>
-        <SideNav />
-        <div class="projects">
-          <div class="text-center"><h2 class="title-one">{{project.name}}</h2></div>
-          <TasksBar v-bind:project="project"/>
-          <TasksList v-bind:tasks="tasks" v-bind:project="project"/>
+<div>
+  <body>
+    <div>
+      <SideNav />
+      <div class="projects">
+        <div class="text-center">
+          <h2 class="title-one">{{project.name}}</h2>
+        </div>
+        <TasksBar v-bind:project="project" />
+        <TasksList v-bind:tasks="tasks" v-bind:project="project" />
+        <!-- TODO: check if owner to display delete button -->
+        <div class="container">
+          <b-button
+            variant="primary"
+            class="btn btn-danger"
+            v-on:click="deleteProject"
+          >Delete Project</b-button>
         </div>
       </div>
-    </body>
-  </div>
+    </div>
+  </body>
+</div>
 </template>
 
 <script>
@@ -26,35 +36,46 @@ export default {
   components: {
     SideNav,
     TasksBar,
-    TasksList,
+    TasksList
   },
   computed: mapGetters(["tasks"]),
   created() {
     axios
-    .get("/projects/"+this.$route.params.id)
-    .then(response => {
-      this.project = response.data
-    })
-    .catch(error => {
-      console.log(error);
-    });
+      .get("/projects/" + this.$route.params.id)
+      .then(response => {
+        this.project = response.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
     axios
-        .get("/tasks/project/"+this.$route.params.id)
+      .get("/tasks/project/" + this.$route.params.id)
+      .then(response => {
+        this.setTasks(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  },
+  methods: {
+    ...mapActions(["setTasks"]),
+    deleteProject() {
+      axios
+        .delete("/projects/" + this.$route.params.id)
         .then(response => {
-          this.setTasks(response.data);
+          this.$router.push({ name: "Dashboard" });
+          console.log(response);
         })
         .catch(error => {
           console.log(error);
         });
-  },
-  methods: {
-    ...mapActions(["setTasks"])
+    }
   },
   data() {
     return {
-      project: [],
+      project: []
     };
-  },
+  }
 };
 </script>
 
@@ -88,5 +109,10 @@ export default {
   left: -40px;
   position: absolute;
   top: 0;
+}
+
+.btn {
+  border-radius: 0;
+  margin-bottom: 10px;
 }
 </style>

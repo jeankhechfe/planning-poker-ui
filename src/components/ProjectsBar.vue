@@ -97,8 +97,15 @@ export default {
       this.description = "";
     },
     createProject() {
+      const project = {
+        name: this.name,
+        description: this.description
+      };
+      const header = {
+        Token: this.$store.getters.user.token,
+      };
       axios
-        .post("/projects", { name: this.name, description: this.description })
+        .post("/projects", project, header)
         .then((response) => {
           this.addProject({
             id: response.data.id,
