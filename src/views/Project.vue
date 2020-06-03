@@ -63,8 +63,8 @@ export default {
       axios
         .delete("/projects/" + this.$route.params.id)
         .then(response => {
-          this.$router.push({ name: "Dashboard" });
-          console.log(response);
+          if(response.statusText=="OK")
+            this.$router.push({ name: "Dashboard" });
         })
         .catch(error => {
           console.log(error);

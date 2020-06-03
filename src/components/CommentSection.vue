@@ -8,6 +8,12 @@
       </div>
       <ul class="commentList">
         <li v-for="comment in comments" :key="comment.id">
+          <b-button
+            v-if="comment.user.login == username"
+            variant="primary"
+            class="btn btn-danger float-right"
+            v-on:click="deleteComment(comment.id)"
+          >Delete</b-button>
           <div class="commenterImage">
             <img src="@/assets/poker-logo.png" />
           </div>
@@ -37,7 +43,8 @@ export default {
   data() {
     return {
       newComment: "",
-      comments: null
+      comments: null,
+      username: ""
     };
   },
   methods: {
@@ -56,9 +63,23 @@ export default {
         .catch(error => {
           console.log(error);
         });
+    },
+    deleteComment(id) {
+      axios
+        .delete("/tasks/" + this.$route.params.id + "/comments/" + id)
+        .then(response => {
+          if(response.statusText=="OK"){
+            const index = this.comments.findIndex(c => c.id == id);
+            if(index > -1) { this.comments.splice(index, 1); }
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   },
   created() {
+    this.username = this.$store.getters.user.username;
     axios
       .get("/tasks/" + this.$route.params.id + "/comments")
       .then(response => {
@@ -125,10 +146,14 @@ export default {
   list-style: none;
   max-height: 200px;
   overflow: auto;
+  margin-left: -5px;
+  margin-right: -5px;
 }
 .commentList li {
-  margin: 0;
-  margin-top: 10px;
+  margin: 10px 5px;
+  padding: 2px 10px;
+  background-color: #d6d8db;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 .commentList li > div {
   display: table-cell;
@@ -171,5 +196,9 @@ export default {
   color: #fff !important;
   box-shadow: none !important;
   outline: none;
+}
+.btn {
+  border-radius: 0;
+  margin: 10px 0;
 }
 </style>
