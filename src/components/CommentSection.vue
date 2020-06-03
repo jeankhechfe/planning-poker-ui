@@ -9,6 +9,7 @@
       <ul class="commentList">
         <li v-for="comment in comments" :key="comment.id">
           <b-button
+            v-if="comment.user.login == username"
             variant="primary"
             class="btn btn-danger float-right"
             v-on:click="deleteComment(comment.id)"
@@ -42,7 +43,8 @@ export default {
   data() {
     return {
       newComment: "",
-      comments: null
+      comments: null,
+      username: ""
     };
   },
   methods: {
@@ -77,6 +79,7 @@ export default {
     }
   },
   created() {
+    this.username = this.$store.getters.user.username;
     axios
       .get("/tasks/" + this.$route.params.id + "/comments")
       .then(response => {
