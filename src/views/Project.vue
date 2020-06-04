@@ -9,8 +9,9 @@
         </div>
         <TasksBar v-bind:project="project" />
         <TasksList v-bind:tasks="tasks" v-bind:project="project" />
-        <!-- TODO: check if owner to display delete button -->
-        <div class="container">
+        <!-- TODO: check if owner to display delete button && AssignUsersSection-->
+        <AssignUsersSection />
+        <div class="container" style="padding: 0">
           <b-button
             variant="primary"
             class="btn btn-danger"
@@ -28,6 +29,7 @@
 import SideNav from "@/components/SideNav.vue";
 import TasksBar from "@/components/TasksBar";
 import TasksList from "@/components/TasksList";
+import AssignUsersSection from "@/components/AssignUsersSection";
 import axios from "../service/axios-api";
 import { mapGetters, mapActions } from "vuex";
 
@@ -36,7 +38,8 @@ export default {
   components: {
     SideNav,
     TasksBar,
-    TasksList
+    TasksList,
+    AssignUsersSection,
   },
   computed: mapGetters(["tasks"]),
   created() {

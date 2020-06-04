@@ -29,17 +29,25 @@ export default {
   },
   computed: mapGetters(["projects"]),
   methods: {
-    ...mapActions(["setProjects"])
+    ...mapActions(["setProjects", "setUsers"])
   },
   created() {
     axios
-        .get("/projects")
-        .then(response => {
-          this.setProjects(response.data);
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      .get("/projects")
+      .then(response => {
+        this.setProjects(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    axios
+      .get("/users/")
+      .then(response => {
+        this.setUsers(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 };
 </script>
