@@ -3,7 +3,7 @@
     <h3>Comments</h3>
 
     <div class="actionBox">
-      <div v-if="comments == null">
+      <div v-if="comments.length == 0">
         <h6>There are no comments yet...</h6>
       </div>
       <ul class="commentList">
