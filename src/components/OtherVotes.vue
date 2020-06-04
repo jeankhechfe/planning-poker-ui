@@ -1,15 +1,16 @@
 <template>
   <div class="container">
     <h2>Users Votes</h2>
-    <div class="no-estimation" v-if="estimations == null">
-      <h6>There are No previouse votes</h6>
+    <div class="no-estimation" v-if="estimations.length == 0">
+      <h6>There are no votes yet...</h6>
     </div>
     <div v-for="estimation in estimations" v-bind:key="estimation.id">
       <p class="vote-text">
         {{ estimation.user.login }}:
         <strong v-show="isVoted">{{ estimation.estimation }}</strong>
         <strong v-show="!isVoted">*</strong>
-        <br>{{new Date(estimation.updated).toLocaleString()}}
+        <br />
+        {{new Date(estimation.updated).toLocaleString()}}
       </p>
     </div>
   </div>
@@ -26,9 +27,9 @@ export default {
   created() {
     axios
       .get("/tasks/" + this.$route.params.id + "/estimations")
-      .then((response) => {
+      .then(response => {
         this.setEstimations(response.data);
-        this.estimations.forEach((obj) => {
+        this.estimations.forEach(obj => {
           if (obj.estimation == 99999) {
             obj.estimation = "INFINITY";
           } else if (obj.estimation == 123456) {
@@ -37,7 +38,7 @@ export default {
           // if(obj.user.login == this.$store.getters.user.username) { this.isVoted = true; }
         });
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   },
