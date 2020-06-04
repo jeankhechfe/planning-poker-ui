@@ -20,7 +20,7 @@
           <div class="commentText">
             <h4>{{comment.user.login}}</h4>
             <p class>{{comment.text}}</p>
-            <span class="date sub-text">{{comment.created}}</span>
+            <span class="date sub-text">{{new Date(comment.created).toLocaleString()}}</span>
           </div>
         </li>
       </ul>
