@@ -68,9 +68,11 @@ export default {
       axios
         .delete("/tasks/" + this.$route.params.id + "/comments/" + id)
         .then(response => {
-          if(response.statusText=="OK"){
+          if (response.statusText == "OK") {
             const index = this.comments.findIndex(c => c.id == id);
-            if(index > -1) { this.comments.splice(index, 1); }
+            if (index > -1) {
+              this.comments.splice(index, 1);
+            }
           }
         })
         .catch(error => {
@@ -144,7 +146,6 @@ export default {
 .commentList {
   padding: 0;
   list-style: none;
-  max-height: 200px;
   overflow: auto;
   margin-left: -5px;
   margin-right: -5px;
