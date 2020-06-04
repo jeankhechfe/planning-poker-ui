@@ -6,7 +6,7 @@
         <p class="user">{{ user.username }} <span class="float-right">{{ user.permissionType }}</span></p>
       </div>
     </div>
-    <div class="unassigned_users" v-if="unassigned_users.length > 0">
+    <div class="unassigned_users" v-if="unassigned_users.length > 0 && isOwner">
       <h3>Unassigned Users</h3>
       <div v-for="user in unassigned_users" v-bind:key="user.id" class="col">
         <b-button
@@ -29,7 +29,8 @@ export default {
     return {
       all_users: this.$store.getters.users,
       assigned_users: [],
-      unassigned_users: []
+      unassigned_users: [],
+      isOwner: false
     };
   },
   created() {
@@ -40,6 +41,9 @@ export default {
           let permission = response.data.filter(e => e.userId == user.id);
           if(permission.length > 0) {
             user.permissionType = permission[0].permissionType
+            if(permission[0].permissionType == "OWNER" && this.$store.getters.user.token == permission[0].userId) {
+              this.isOwner = true;
+            }
             this.assigned_users.push(user);
           } else {
             this.unassigned_users.push(user);
