@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h2>Users Votes</h2>
-    <div class="no-estimation" v-if="estimations.length == 0">
+    <div class="no-estimation" v-if="estimations == null">
       <h6>There are no votes yet...</h6>
     </div>
     <div v-for="estimation in estimations" v-bind:key="estimation.id">
