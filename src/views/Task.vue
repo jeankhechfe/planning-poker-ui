@@ -22,6 +22,12 @@
               </div>
               <div class="col-md-4">
                 <OtherVotes v-bind:estimations="estimations" v-bind:isVoted="isVoted" />
+                <b-button
+                  v-if="isOwner"
+                  variant="primary"
+                  class="btn btn-success"
+                  v-on:click="finalize()"
+                >Finalize Estimation</b-button>  
               </div>
             </div>
           </div>
@@ -68,6 +74,23 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+      axios
+      .get("/tasks/" + this.$route.params.id)
+      .then(response => {
+        axios
+        .get("/permissions/project/" + response.data.project.id)
+        .then(response => {
+          let permission = response.data.filter(p => p.permissionType == "OWNER");
+          if(permission[0].userId == this.$store.getters.user.token)
+            this.isOwner = true;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   },
   methods: {
     ...mapActions(["setEstimations", "addEstimation"]),
@@ -78,12 +101,37 @@ export default {
     },
     set_Voted(x) {
       this.isVoted = x;
+    },
+    finalize() {
+      let sum = 0, i = 0;
+      this.estimations.forEach(e => {
+        sum += e.estimation;
+        i++;
+      });
+      let avg = sum/i;
+      const fourier = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 99999]
+      let index = fourier.findIndex(f => {
+        return f > avg;
+      });
+      const task = {
+        estimation: fourier[index]
+      };
+      axios
+      .put("/tasks/" + this.$route.params.id, task)
+      .then((response) => {
+        if(response.statusText == "OK");
+          this.$router.go(-1);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     }
   },
   data() {
     return {
       task: [],
       isVoted: false,
+      isOwner: false
     };
   },
 };
@@ -119,5 +167,8 @@ export default {
   left: -40px;
   position: absolute;
   top: 0;
+}
+.btn {
+  border-radius: 0;
 }
 </style>
