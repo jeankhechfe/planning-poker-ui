@@ -9,9 +9,8 @@
         </div>
         <TasksBar v-bind:project="project" />
         <TasksList v-bind:tasks="tasks" v-bind:project="project" />
-        <!-- TODO: check if owner to display delete button && AssignUsersSection-->
-        <AssignUsersSection />
-        <div class="container" style="padding: 0">
+        <AssignUsersSection v-on:set-owner="set_owner"/>
+        <div v-if="isOwner" class="container" style="padding: 0">
           <b-button
             variant="primary"
             class="btn btn-danger"
@@ -72,11 +71,15 @@ export default {
         .catch(error => {
           console.log(error);
         });
+    },
+    set_owner() {
+      this.isOwner = true; 
     }
   },
   data() {
     return {
-      project: []
+      project: [],
+      isOwner: false
     };
   }
 };

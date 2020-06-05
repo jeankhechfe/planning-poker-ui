@@ -43,6 +43,7 @@ export default {
             user.permissionType = permission[0].permissionType
             if(permission[0].permissionType == "OWNER" && this.$store.getters.user.token == permission[0].userId) {
               this.isOwner = true;
+              this.$emit('set-owner');
             }
             this.assigned_users.push(user);
           } else {
