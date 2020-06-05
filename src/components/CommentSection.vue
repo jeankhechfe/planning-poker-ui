@@ -3,7 +3,7 @@
     <h3>Comments</h3>
 
     <div class="actionBox">
-      <div v-if="comments == null">
+      <div v-if="comments.length == 0">
         <h6>There are no comments yet...</h6>
       </div>
       <ul class="commentList">
@@ -20,7 +20,7 @@
           <div class="commentText">
             <h4>{{comment.user.login}}</h4>
             <p class>{{comment.text}}</p>
-            <span class="date sub-text">{{comment.created}}</span>
+            <span class="date sub-text">{{new Date(comment.created).toLocaleString()}}</span>
           </div>
         </li>
       </ul>
@@ -68,9 +68,11 @@ export default {
       axios
         .delete("/tasks/" + this.$route.params.id + "/comments/" + id)
         .then(response => {
-          if(response.statusText=="OK"){
+          if (response.statusText == "OK") {
             const index = this.comments.findIndex(c => c.id == id);
-            if(index > -1) { this.comments.splice(index, 1); }
+            if (index > -1) {
+              this.comments.splice(index, 1);
+            }
           }
         })
         .catch(error => {
@@ -144,7 +146,6 @@ export default {
 .commentList {
   padding: 0;
   list-style: none;
-  max-height: 200px;
   overflow: auto;
   margin-left: -5px;
   margin-right: -5px;
