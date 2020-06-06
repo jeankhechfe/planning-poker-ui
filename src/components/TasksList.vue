@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <div class="row">
-
         <div class="tasks">
           <ul class="post-meta">
             <li>
@@ -13,7 +12,10 @@
           <div>
             <p>{{ project.description }}</p>
           </div>
-          <div>
+          <div v-if="tasks.length == 0" class="text-center">
+            <p>There are no tasks in this project, Create task to be estimated</p>
+          </div>
+          <div v-if="tasks.length != 0">
             <h4>Tasks need Estimation</h4>
             <div
               v-for="task in tasks"
