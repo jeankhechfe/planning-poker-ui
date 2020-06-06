@@ -5,7 +5,7 @@
       <h1>The Best Agile Planning Tool</h1>
     </div>
     <div class="container">
-      <p style="margin: 30px">
+      <p>
         Planning Poker is a digital card game designed to help agile and scrum
         development teams effectively set their sprint goals through
         collaborative planning and consensus-based estimations. Planning Poker
@@ -23,7 +23,10 @@ export default {
 </script>
 
 <style scoped>
-.About {
+.About,
+img,
+p,
+h1 {
   margin-top: 30px;
 }
 </style>
