@@ -35,7 +35,6 @@ export default {
           } else if (obj.estimation == 123456) {
             obj.estimation = "?";
           }
-          // if(obj.user.login == this.$store.getters.user.username) { this.isVoted = true; }
         });
       })
       .catch(error => {
