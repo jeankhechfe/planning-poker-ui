@@ -52,7 +52,6 @@ export default {
               console.log(error);
             });
         });
-        console.log(this.projects);
         setTimeout(() => {
           this.loaded = true;
         }, 1000); 
