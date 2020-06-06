@@ -6,6 +6,7 @@ import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Project from "../views/Project.vue";
 import Task from "../views/Task.vue";
+import AssignedTasks from "../views/AssignedTasks"
 import user from "../store/modules/user";
 
 Vue.use(VueRouter);
@@ -46,6 +47,14 @@ const routes = [
     path: "/task/:id",
     name: "Task",
     component: Task,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/user/tasks/",
+    name: "AssignedTasks",
+    component: AssignedTasks,
     meta: {
       requiresAuth: true,
     },

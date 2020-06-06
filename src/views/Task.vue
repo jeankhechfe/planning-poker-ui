@@ -53,7 +53,7 @@ import axios from "../service/axios-api";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "Body",
+  name: "Task",
   components: {
     SideNav,
     VotingCards,

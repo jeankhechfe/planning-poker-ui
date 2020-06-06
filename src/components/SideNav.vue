@@ -2,15 +2,6 @@
   <div class="sidenav container">
     <nav class="main-menu">
       <ul>
-        <!-- <li>
-          <router-link :to="{ name: 'Landing' }">
-            <i class="fa fa-home fa-2x"></i>
-            <span class="nav-text">
-              Home
-            </span>
-          </router-link>
-        </li>
-        &nbsp;-->
         <li>
           <div class="user">
             <i class="fa fa-user fa-2x"></i>
@@ -25,7 +16,7 @@
           </router-link>
         </li>
         <li class="has-subnav">
-          <router-link :to="{ name: 'Dashboard' }">
+          <router-link :to="{ name: 'AssignedTasks' }">
             <i class="fa fa-list fa-2x"></i>
             <span class="nav-text">Assigned Tasks</span>
           </router-link>
