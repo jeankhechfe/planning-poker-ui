@@ -75,6 +75,9 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  overflow: hidden
+}
 .title-one {
   color: #666666;
   display: inline-block;
