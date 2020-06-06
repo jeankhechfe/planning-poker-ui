@@ -27,7 +27,13 @@
                   variant="primary"
                   class="btn btn-success"
                   v-on:click="finalize()"
-                >Finalize Estimation</b-button>  
+                >Finalize Estimation</b-button>
+                <b-button
+                  v-if="isOwner"
+                  variant="primary"
+                  class="btn btn-danger"
+                  v-on:click="deleteTask()"
+                >Delete Task</b-button>
               </div>
             </div>
           </div>
@@ -125,6 +131,18 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+    },
+    deleteTask() {
+      axios
+        .delete("/tasks/" +  this.$route.params.id)
+        .then(response => {
+          console.log(response)
+          if(response.statusText=="OK")
+            this.$router.go(-1);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   },
   data() {
@@ -170,5 +188,7 @@ export default {
 }
 .btn {
   border-radius: 0;
+  margin-right: 15px;
+  margin-bottom: 15px;
 }
 </style>
