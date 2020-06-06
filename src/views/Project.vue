@@ -6,16 +6,78 @@
       <div class="projects">
         <div class="text-center">
           <h2 class="title-one">{{project.name}}</h2>
+          <p>{{ project.description }}</p>
         </div>
         <TasksBar v-bind:project="project" />
-        <TasksList v-bind:tasks="tasks" v-bind:project="project" />
+        <TasksList v-bind:tasks="tasks" />
         <AssignUsersSection v-on:set-owner="set_owner"/>
         <div v-if="isOwner" class="container" style="padding: 0">
+          <b-button
+            variant="primary"
+            class="btn btn-default"
+            v-b-modal.editProjectModal
+          >Edit Project</b-button>
           <b-button
             variant="primary"
             class="btn btn-danger"
             v-on:click="deleteProject"
           >Delete Project</b-button>
+          <b-modal
+          id="editProjectModal"
+          ref="editProjectModal"
+          hide-footer
+          hide-header
+        >
+          <div>
+            <h3>Edit {{project.name}}</h3>
+            <hr />
+            <b-form>
+              <div class="form-group row">
+                <label for="name" class="col-md-3 col-form-label text-md-right"
+                  >Name</label
+                >
+                <div class="col-md-9">
+                  <b-form-input
+                    id="name"
+                    class="form-control"
+                    v-model="name"
+                    placeholder="Project name"
+                    name="name"
+                    required
+                  ></b-form-input>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label
+                  for="description"
+                  class="col-md-3 col-form-label text-md-right"
+                  >Description</label
+                >
+                <div class="col-md-9">
+                  <b-form-textarea
+                    id="description"
+                    class="form-control"
+                    v-model="description"
+                    placeholder="Enter project description..."
+                    rows="6"
+                    max-rows="6"
+                    name="description"
+                    required
+                  ></b-form-textarea>
+                </div>
+              </div>
+              <div class="text-right">
+                <b-button class="btn-modal" @click="hideModal">Cancel</b-button>
+                <b-button
+                  class="btn-modal"
+                  variant="success"
+                  @click="editProject"
+                  >Edit</b-button
+                >
+              </div>
+            </b-form>
+          </div>
+        </b-modal>
         </div>
       </div>
     </div>
@@ -46,6 +108,8 @@ export default {
       .get("/projects/" + this.$route.params.id)
       .then(response => {
         this.project = response.data;
+        this.name = this.project.name;
+        this.description = this.project.description; 
       })
       .catch(error => {
         console.log(error);
@@ -74,12 +138,35 @@ export default {
     },
     set_owner() {
       this.isOwner = true; 
-    }
+    },
+    hideModal() {
+      this.$refs["editProjectModal"].hide();
+    },
+    editProject() {
+      const project = {
+        name: this.name,
+        description: this.description
+      };
+      axios
+        .put("/projects/" + this.$route.params.id, project)
+        .then((response) => {
+          this.name = response.data.name,
+          this.project.name = response.data.name,
+          this.description = response.data.description,
+          this.project.description = response.data.description,
+          this.hideModal();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
   data() {
     return {
       project: [],
-      isOwner: false
+      isOwner: false,
+      name: null,
+      description: null
     };
   }
 };
@@ -119,6 +206,7 @@ export default {
 
 .btn {
   border-radius: 0;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  margin-right: 15px;
 }
 </style>

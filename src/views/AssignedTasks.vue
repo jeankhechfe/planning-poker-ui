@@ -52,7 +52,6 @@ export default {
               console.log(error);
             });
         });
-        console.log(this.projects);
         setTimeout(() => {
           this.loaded = true;
         }, 1000); 
@@ -76,6 +75,9 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  overflow: hidden
+}
 .title-one {
   color: #666666;
   display: inline-block;

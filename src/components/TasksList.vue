@@ -9,9 +9,6 @@
               {{ tasks.length }}
             </li>
           </ul>
-          <div>
-            <p>{{ project.description }}</p>
-          </div>
           <div v-if="tasks.length == 0" class="text-center">
             <p>There are no tasks in this project, Create task to be estimated</p>
           </div>
@@ -69,7 +66,7 @@
 <script>
 export default {
   name: "TasksList",
-  props: ["tasks", "project"],
+  props: ["tasks"],
 
 };
 </script>
