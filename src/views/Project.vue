@@ -6,9 +6,10 @@
       <div class="projects">
         <div class="text-center">
           <h2 class="title-one">{{project.name}}</h2>
+          <p>{{ project.description }}</p>
         </div>
         <TasksBar v-bind:project="project" />
-        <TasksList v-bind:tasks="tasks" v-bind:project="project" />
+        <TasksList v-bind:tasks="tasks" />
         <AssignUsersSection v-on:set-owner="set_owner"/>
         <div v-if="isOwner" class="container" style="padding: 0">
           <b-button
