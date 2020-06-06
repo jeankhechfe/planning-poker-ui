@@ -53,7 +53,8 @@
                   <p>{{ task.description }}</p>
                 </div>
                 <div class="col-sm-2 text-center">
-                  <h3 class="estimation">{{ task.estimation }}</h3>
+                  <h3 v-if="task.estimation != 99999" class="estimation">{{ task.estimation }}</h3>
+                  <h3 v-if="task.estimation == 99999" class="estimation">INFINITY</h3>
                 </div>
               </div>
             </div>

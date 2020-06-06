@@ -105,13 +105,15 @@ export default {
     finalize() {
       let sum = 0, i = 0;
       this.estimations.forEach(e => {
-        sum += e.estimation;
-        i++;
+        if(e.estimation != 123456) {
+          sum += e.estimation;
+          i++;
+        }
       });
       let avg = sum/i;
       const fourier = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 99999]
       let index = fourier.findIndex(f => {
-        return f > avg;
+        return f >= avg;
       });
       const task = {
         estimation: fourier[index]
