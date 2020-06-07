@@ -1,73 +1,75 @@
 <template>
   <div class="container">
     <div class="row">
-        <div class="tasks">
-          <ul class="post-meta">
-            <li>
-              <i class="fa fa-clock"></i>
-              <strong> Number of Tasks:</strong>
-              {{ tasks.length }}
-            </li>
-          </ul>
-          <div v-if="tasks.length == 0" class="text-center">
-            <p>There are no tasks in this project, Create task to be estimated</p>
-          </div>
-          <div v-if="tasks.length != 0">
-            <h4>Tasks need Estimation</h4>
-            <div
-              v-for="task in tasks"
-              v-bind:key="task.id + '1'"
-              class="col-sm-12"
-            >
-              <div class="row single-task" v-if="task.estimation == 0">
-                <div class="col-sm-2">
-                  <h5>{{ task.name }}</h5>
-                </div>
-                <div class="col-sm-8 text-center">
-                  <p>{{ task.description }}</p>
-                </div>
-                <div class="col-sm-2">
-                  <router-link
-                    :to="{
+      <div class="tasks">
+        <ul class="post-meta">
+          <li>
+            <i class="fa fa-clock"></i>
+            <strong>Number of Tasks:</strong>
+            {{ tasks.length }}
+          </li>
+        </ul>
+        <div v-if="tasks.length == 0" class="text-center">
+          <p>There are no tasks in this project, Create task to be estimated</p>
+        </div>
+        <div v-if="unestimated_tasks.length != 0">
+          <h4>Tasks need Estimation</h4>
+          <div v-for="task in unestimated_tasks" v-bind:key="task.id" class="col-sm-12">
+            <div class="row single-task">
+              <div class="col-sm-2">
+                <h5>{{ task.name }}</h5>
+              </div>
+              <div class="col-sm-8 text-center">
+                <p>{{ task.description }}</p>
+              </div>
+              <div class="col-sm-2">
+                <router-link
+                  :to="{
                       name: 'Task',
                       params: { id: task.id },
                     }"
-                    class="btn btn-estimate float-right"
-                    >Estimate now</router-link
-                  >
-                </div>
+                  class="btn btn-estimate float-right"
+                >Estimate now</router-link>
               </div>
             </div>
-            <h4 style="margin-top: 40px;">Estimated Tasks</h4>
-            <div
-              v-for="task in tasks"
-              v-bind:key="task.id + '2'"
-              class="col-sm-12"
-            >
-              <div class="row single-task" v-if="task.estimation != 0">
-                <div class="col-sm-2">
-                  <h5>{{ task.name }}</h5>
-                </div>
-                <div class="col-sm-8 text-center">
-                  <p>{{ task.description }}</p>
-                </div>
-                <div class="col-sm-2 text-center">
-                  <h3 v-if="task.estimation != 99999" class="estimation">{{ task.estimation }}</h3>
-                  <h3 v-if="task.estimation == 99999" class="estimation">INFINITY</h3>
-                </div>
+          </div>
+        </div>
+        <div v-if="estimated_tasks.length != 0">
+          <h4 style="margin-top: 40px;">Estimated Tasks</h4>
+          <div v-for="task in estimated_tasks" v-bind:key="task.id" class="col-sm-12">
+            <div class="row single-task">
+              <div class="col-sm-2">
+                <h5>{{ task.name }}</h5>
+              </div>
+              <div class="col-sm-8 text-center">
+                <p>{{ task.description }}</p>
+              </div>
+              <div class="col-sm-2 text-center">
+                <h3 v-if="task.estimation != 99999" class="estimation">{{ task.estimation }}</h3>
+                <h3 v-if="task.estimation == 99999" class="estimation">INFINITY</h3>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
   name: "TasksList",
   props: ["tasks"],
-
+  data() {
+    return {
+      estimated_tasks: [],
+      unestimated_tasks: [],
+    };
+  },
+  created() {
+    this.unestimated_tasks = this.tasks.filter(task => task.estimation == 0);
+    this.estimated_tasks = this.tasks.filter(task => task.estimation != 0);
+  },
 };
 </script>
 
