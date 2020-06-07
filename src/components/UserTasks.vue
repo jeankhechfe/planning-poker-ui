@@ -14,7 +14,6 @@
             </li>
           </ul>
           <div>
-            <h4>Tasks need Estimation</h4>
             <div
               v-for="task in tasks"
               v-bind:key="task.id"
