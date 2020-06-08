@@ -70,6 +70,12 @@ export default {
     this.unestimated_tasks = this.tasks.filter(task => task.estimation == 0);
     this.estimated_tasks = this.tasks.filter(task => task.estimation != 0);
   },
+  watch: {
+    tasks: function(newTasks) {
+      this.unestimated_tasks = newTasks.filter(task => task.estimation == 0);
+      this.estimated_tasks = newTasks.filter(task => task.estimation != 0);
+    }
+  }
 };
 </script>
 
