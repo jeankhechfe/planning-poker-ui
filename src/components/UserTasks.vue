@@ -66,6 +66,7 @@ export default {
 }
 
 .tasks .btn-estimate {
+  margin-top: 1px;
   text-transform: uppercase;
   border: 1px solid #cf142b;
   color: #686868;
