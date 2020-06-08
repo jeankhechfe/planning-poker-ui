@@ -58,6 +58,7 @@ export default {
         .then(response => {
           if (response.status == 200) {
             this.comments.push(response.data);
+            this.newComment = "";
           }
         })
         .catch(error => {
