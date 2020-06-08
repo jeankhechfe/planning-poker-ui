@@ -138,7 +138,6 @@ export default {
       axios
         .delete("/tasks/" +  this.$route.params.id)
         .then(response => {
-          console.log(response)
           if(response.statusText=="OK")
             this.$router.go(-1);
         })
