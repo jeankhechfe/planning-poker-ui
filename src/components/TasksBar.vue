@@ -11,12 +11,14 @@
       </div>
       <div class="col-md-6">
         <b-button
+          v-if="isOwner"
           variant="primary"
           v-b-modal.createTaskModal
           class="btn btn-success float-right"
           >Create Task</b-button
         >
         <b-modal
+          v-if="isOwner"
           id="createTaskModal"
           ref="createTaskModal"
           hide-footer
@@ -89,7 +91,7 @@ export default {
       description: "",
     };
   },
-  props: ["project"],
+  props: ["project", "isOwner"],
   methods: {
     ...mapActions(["addTask"]),
     hideModal() {
