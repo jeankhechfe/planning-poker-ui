@@ -135,4 +135,8 @@ ul li {
   padding: 10px 0;
   margin: 10px 0;
 }
+p {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
 </style>

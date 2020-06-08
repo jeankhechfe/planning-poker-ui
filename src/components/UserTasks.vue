@@ -6,7 +6,7 @@
             <h3>{{ project.name }}</h3>
             <p>{{ project.description }}</p>
           </div>
-                    <ul class="post-meta">
+          <ul class="post-meta">
             <li>
               <i class="fa fa-clock"></i>
               <strong> Number of Tasks:</strong>
@@ -113,5 +113,10 @@ ul li {
 .single-task {
   padding: 10px 0;
   margin: 10px 0;
+}
+h5,
+p {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 </style>
