@@ -111,7 +111,7 @@ export default {
     finalize() {
       let sum = 0, i = 0;
       this.estimations.forEach(e => {
-        if(e.estimation != 123456) {
+        if(e.estimation != "?") {
           sum += e.estimation;
           i++;
         }
