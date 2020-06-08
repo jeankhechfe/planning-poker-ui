@@ -10,7 +10,7 @@
           </li>
         </ul>
         <div v-if="tasks.length == 0" class="text-center">
-          <p>There are no tasks in this project, Create task to be estimated</p>
+          <p>There are no tasks in this project</p>
         </div>
         <div v-if="unestimated_tasks.length != 0">
           <h4>Tasks need Estimation</h4>
