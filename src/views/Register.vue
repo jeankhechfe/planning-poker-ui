@@ -15,7 +15,6 @@ export default {
   data() {
     return {
       username: "",
-      email: "",
       password: "",
       password_confirmation: "",
       is_admin: null,
@@ -25,7 +24,6 @@ export default {
     register: function() {
       let data = {
         name: this.name,
-        email: this.email,
         password: this.password,
         is_admin: this.is_admin,
       };

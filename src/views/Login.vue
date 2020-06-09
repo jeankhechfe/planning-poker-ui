@@ -20,10 +20,10 @@ export default {
   },
   methods: {
     login: function() {
-      let email = this.email;
+      let username = this.username;
       let password = this.password;
       this.$store
-        .dispatch("login", { email, password })
+        .dispatch("login", { username, password })
         .then(() => this.$router.push("/"))
         .catch((err) => console.log(err));
     },
