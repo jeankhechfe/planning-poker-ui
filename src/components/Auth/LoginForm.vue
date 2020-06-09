@@ -10,7 +10,7 @@
         v-if="not_registered"
         class="alert alert-danger"
         role="alert"
-      >The username you have entered doesn't match any account</div>
+      >The username or password you have entered doesn't match any account</div>
       <div class="row justify-content-center">
         <div class="col-md-8">
           <div class="card">
@@ -99,7 +99,7 @@ export default {
     ...mapActions(["setUser"]),
     login() {
       axios
-        .post("/login", { Login: this.username })
+        .post("/login", { Login: this.username, Password: this.password })
         .then(response => {
           this.setUser({ username: this.username, token: response.data.token });
           axios.defaults.headers.common["Authorization"] = response.data.token;
@@ -108,7 +108,7 @@ export default {
         .catch(error => {
           if (!error.response) {
             this.no_response = true;
-          } else if (error.response.status == 400) this.not_registered = true;
+          } else if (error.response.status == 400 || error.response.status == 401) this.not_registered = true;
         });
     }
   }

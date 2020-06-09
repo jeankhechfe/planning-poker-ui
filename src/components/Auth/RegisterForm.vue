@@ -124,7 +124,7 @@ export default {
     ...mapActions(["setUser"]),
     register() {
       axios
-        .post("/register", { Login: this.username })
+        .post("/register", { Login: this.username, Password: this.password  })
         .then(response => {
           this.setUser({ username: this.username, token: response.data.token });
           axios.defaults.headers.common["Authorization"] = response.data.token;
