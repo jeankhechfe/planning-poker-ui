@@ -33,20 +33,6 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="email" class="col-md-4 col-form-label text-md-right">Email Address</label>
-                  <div class="col-md-6">
-                    <input
-                      v-model="email"
-                      id="email"
-                      type="email"
-                      class="form-control"
-                      name="email"
-                      required
-                      autofocus
-                    />
-                  </div>
-                </div>
-                <div class="form-group row">
                   <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                   <div class="col-md-6">
                     <input
@@ -114,7 +100,6 @@ export default {
   data() {
     return {
       username: "",
-      email: "",
       password: "",
       password_confirmation: "",
       no_response: false
