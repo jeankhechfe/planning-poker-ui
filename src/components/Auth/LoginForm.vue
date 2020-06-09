@@ -10,7 +10,7 @@
         v-if="not_registered"
         class="alert alert-danger"
         role="alert"
-      >The username you have entered doesn't match any account</div>
+      >The username or password you have entered doesn't match any account</div>
       <div class="row justify-content-center">
         <div class="col-md-8">
           <div class="card">
