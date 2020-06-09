@@ -79,11 +79,9 @@ export default {
         .catch(error => {
           console.log(error);
         });
-    }
-  },
-  created() {
-    this.username = this.$store.getters.user.username;
-    axios
+    },
+    getComments(){
+      axios
       .get("/tasks/" + this.$route.params.id + "/comments")
       .then(response => {
         this.comments = response.data;
@@ -91,7 +89,19 @@ export default {
       .catch(error => {
         console.log(error);
       });
-  }
+    }
+  },
+  created() {
+    this.username = this.$store.getters.user.username;
+    this.getComments();
+  },
+  mounted: function () {
+        this.$nextTick(function () {
+            window.setInterval(() => {
+                this.getComments();
+            },3000);
+        })
+    }
 };
 </script>
 
