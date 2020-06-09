@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div v-for="project in projects" v-bind:key="project.id" class="col-sm-4">
+      <div v-for="project in projects" v-bind:key="project.id" class="col-lg-4 col-md-6 col-sm-12">
         <div class="single-project">
           <h2 class="project-name text-center">{{ project.name }}</h2>
           <div class="project-content">
