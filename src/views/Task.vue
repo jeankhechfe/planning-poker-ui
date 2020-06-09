@@ -22,12 +22,13 @@
               </div>
               <div class="col-md-4">
                 <OtherVotes v-bind:estimations="estimations" v-bind:isVoted="isVoted" />
+                <h4 v-if="task.estimation != 0">Final estimation is {{task.estimation}}</h4>
                 <b-button
-                  v-if="isOwner"
+                  v-if="isOwner && task.estimation == 0"
                   variant="primary"
                   class="btn btn-success"
                   v-on:click="finalize()"
-                >Finalize Estimation</b-button>
+                >Finalize Estimation </b-button>
                 <b-button
                   v-if="isOwner"
                   variant="primary"
@@ -66,6 +67,8 @@ export default {
       .get("/tasks/" + this.$route.params.id)
       .then((response) => {
         this.task = response.data;
+        if(response.data.estimation != 0)
+          this.isVoted = true;
       })
       .catch((error) => {
         console.log(error);
@@ -191,5 +194,8 @@ export default {
   border-radius: 0;
   margin-right: 15px;
   margin-bottom: 15px;
+}
+.h4 {
+  margin-bottom: 30px;
 }
 </style>
