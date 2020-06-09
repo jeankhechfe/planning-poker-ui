@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row bar">
-      <div class="col-md-6">
+      <div class="col-sm-8">
         <input
           class="form-control"
           type="text"
@@ -9,7 +9,7 @@
           aria-label="Search"
         />
       </div>
-      <div class="col-md-6">
+      <div class="col-sm-4">
         <b-button
           variant="primary"
           v-b-modal.createProjectModal
