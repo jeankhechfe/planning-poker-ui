@@ -45,8 +45,15 @@
                 <p>{{ task.description }}</p>
               </div>
               <div class="col-sm-2 text-center">
-                <h3 v-if="task.estimation != 99999" class="estimation">{{ task.estimation }}</h3>
-                <h3 v-if="task.estimation == 99999" class="estimation">INFINITY</h3>
+              <router-link
+                  :to="{
+                      name: 'Task',
+                      params: { id: task.id },
+                    }"
+                  class="btn btn-estimate float-right"
+                >view</router-link>
+                <h3 v-if="task.estimation != 99999" class="estimation number">{{ task.estimation }}</h3>
+                <h3 v-if="task.estimation == 99999" class="estimation number">INFINITY</h3>
               </div>
             </div>
           </div>
@@ -145,5 +152,9 @@ ul li {
 p {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+}
+.estimation.number {
+  margin-bottom: 0;
+  margin-top: 3px;
 }
 </style>
