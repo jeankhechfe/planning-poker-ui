@@ -108,7 +108,7 @@ export default {
         .catch(error => {
           if (!error.response) {
             this.no_response = true;
-          } else if (error.response.status == 400) this.not_registered = true;
+          } else if (error.response.status == 400 || error.response.status == 401) this.not_registered = true;
         });
     }
   }
