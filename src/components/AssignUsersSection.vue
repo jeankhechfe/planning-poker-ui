@@ -3,7 +3,10 @@
     <div class="assigned_users" v-if="assigned_users.length > 0">
       <h3>Assigned Users</h3>
       <div v-for="user in assigned_users" v-bind:key="user.id" class="col">
-        <p class="user">{{ user.username }} <span class="float-right">{{ user.permissionType }}</span></p>
+        <p class="user">
+          {{ user.username }}
+          <span class="float-right">{{ user.permissionType }}</span>
+        </p>
       </div>
     </div>
     <div class="unassigned_users" v-if="unassigned_users.length > 0 && isOwner">
@@ -25,6 +28,7 @@
           <button class="btn btn-success" v-on:click="assigne(selected)">Assign User</button>
         </div>
       </div>
+      <!-- These options will appear after the ones from 'options' prop -->
     </div>
   </div>
 </template>
@@ -39,7 +43,8 @@ export default {
       all_users: this.$store.getters.users,
       assigned_users: [],
       unassigned_users: [],
-      isOwner: false
+      isOwner: false,
+      selected: null
     };
   },
   created() {
@@ -48,11 +53,14 @@ export default {
       .then(response => {
         this.all_users.forEach(user => {
           let permission = response.data.filter(e => e.userId == user.id);
-          if(permission.length > 0) {
-            user.permissionType = permission[0].permissionType
-            if(permission[0].permissionType == "OWNER" && this.$store.getters.user.token == permission[0].userId) {
+          if (permission.length > 0) {
+            user.permissionType = permission[0].permissionType;
+            if (
+              permission[0].permissionType == "OWNER" &&
+              this.$store.getters.user.token == permission[0].userId
+            ) {
               this.isOwner = true;
-              this.$emit('set-owner');
+              this.$emit("set-owner");
             }
             this.assigned_users.push(user);
           } else {
@@ -66,23 +74,27 @@ export default {
   },
   methods: {
     assigne(user) {
-    axios
-      .post("/permissions", { 
-        userId: user.id,
-        projectId: this.$route.params.id,
-        permissionType: "READ_WRITE"
-      })
-      .then(response => {
-        if(response.statusText=="OK"){
+      console.log("test");
+      axios
+        .post("/permissions", {
+          userId: user.id,
+          projectId: this.$route.params.id,
+          permissionType: "READ_WRITE"
+        })
+        .then(response => {
+          if (response.statusText == "OK") {
             const index = this.unassigned_users.findIndex(u => u.id == user.id);
-            if(index > -1) { this.unassigned_users.splice(index, 1); }
-            user.permissionType = "READ_WRITE"
+            if (index > -1) {
+              this.unassigned_users.splice(index, 1);
+            }
+            user.permissionType = "READ_WRITE";
+
             this.assigned_users.push(user);
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
 };
@@ -100,9 +112,23 @@ export default {
   background-color: #d6d8db;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
+
 .btn {
   border-radius: 0;
-  padding: 1px 2px;
+  margin: 5px;
+}
+
+.single-task {
+  background-color: #d6d8db;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  padding: 10px 0;
+  margin: 10px 0;
+}
+.u-user-list {
+  margin-top: 5px;
+}
+.assign-n-user {
+  margin: 15px;
 }
 .select-user {
   border-radius: 0;

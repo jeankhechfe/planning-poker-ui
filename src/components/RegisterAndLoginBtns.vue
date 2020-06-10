@@ -3,9 +3,12 @@
     <div class="text-center">
       <div class="row">
         <div class="col-md-6 offset-md-3">
-          <div>
+          <div v-if="!isUserLoggedIn">
             <router-link class="primary-btn login" :to="{ name: 'Login' }">Login</router-link>
             <router-link class="primary-btn" :to="{ name: 'Register' }">Register</router-link>
+          </div>
+          <div v-if="isUserLoggedIn">
+            <router-link class="primary-btn" :to="{ name: 'Dashboard' }">Dashboard</router-link>
           </div>
         </div>
       </div>
@@ -15,7 +18,23 @@
 
 <script>
 export default {
-  name: "RegisterAndLoginBtns"
+  name: "RegisterAndLoginBtns",
+  data() {
+    return {
+      isUserLoggedIn: "",
+      username: ""
+    };
+  },
+  created() {
+    let userSession, user;
+    try {
+      userSession = JSON.parse(localStorage.getItem("pp-app"));
+      user = userSession.user.user;
+      this.isUserLoggedIn = user.token ? true : false;
+    } catch (error) {
+      this.isUserLoggedIn = false;
+    }
+  }
 };
 </script>
 
@@ -40,6 +59,6 @@ export default {
   color: #fff;
 }
 .login {
-    padding: 8px 25px 10px 25px;
+  padding: 8px 25px 10px 25px;
 }
 </style>
