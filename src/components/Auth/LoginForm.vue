@@ -1,16 +1,12 @@
 <template>
   <div>
     <div class="container">
-      <div
-        v-if="no_response"
-        class="alert alert-danger"
-        role="alert"
-      >Our backend serve is having some issues, please try again later</div>
-      <div
-        v-if="not_registered"
-        class="alert alert-danger"
-        role="alert"
-      >The username or password you have entered doesn't match any account</div>
+      <div v-if="no_response" class="alert alert-danger" role="alert">
+        Our backend serve is having some issues, please try again later
+      </div>
+      <div v-if="not_registered" class="alert alert-danger" role="alert">
+        The username or password you have entered doesn't match any account
+      </div>
       <div class="row justify-content-center">
         <div class="col-md-8">
           <div class="card">
@@ -24,7 +20,11 @@
             <div class="card-body">
               <form @submit.prevent="login">
                 <div class="form-group row">
-                  <label for="username" class="col-md-4 col-form-label text-md-right">Username</label>
+                  <label
+                    for="username"
+                    class="col-md-4 col-form-label text-md-right"
+                    >Username</label
+                  >
                   <div class="col-md-6">
                     <input
                       v-model="username"
@@ -38,7 +38,11 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                  <label
+                    for="password"
+                    class="col-md-4 col-form-label text-md-right"
+                    >Password</label
+                  >
                   <div class="col-md-6">
                     <input
                       v-model="password"
@@ -92,7 +96,7 @@ export default {
       username: "",
       password: "",
       not_registered: false,
-      no_response: false
+      no_response: false,
     };
   },
   methods: {
@@ -100,18 +104,22 @@ export default {
     login() {
       axios
         .post("/login", { Login: this.username, Password: this.password })
-        .then(response => {
+        .then((response) => {
           this.setUser({ username: this.username, token: response.data.token });
           axios.defaults.headers.common["Authorization"] = response.data.token;
           this.$router.push({ name: "Dashboard" });
         })
-        .catch(error => {
+        .catch((error) => {
           if (!error.response) {
             this.no_response = true;
-          } else if (error.response.status == 400 || error.response.status == 401) this.not_registered = true;
+          } else if (
+            error.response.status == 400 ||
+            error.response.status == 401
+          )
+            this.not_registered = true;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
