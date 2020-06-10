@@ -77,17 +77,18 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  let userSession = JSON.parse(localStorage.getItem("pp-app"));
+  let token = userSession.user.user.token;
+
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    let userSession = JSON.parse(localStorage.getItem("pp-app"));
-    if (userSession.user.user.token) {
-      axios.defaults.headers.common["Authorization"] =
-        userSession.user.user.token;
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = token;
       next();
     } else {
       next("/login");
     }
   } else {
-    if (to.matched.some((record) => record.meta.requested)) {
+    if (to.matched.some((record) => record.meta.requested) && token) {
       next("/dashboard");
     } else {
       next();
