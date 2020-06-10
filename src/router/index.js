@@ -18,6 +18,7 @@ const routes = [
     component: Dashboard,
     meta: {
       requiresAuth: true,
+      requested: "Dashboard",
     },
   },
   {
@@ -29,11 +30,19 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+    meta: {
+      requiresAuth: false,
+      requested: "Auth",
+    },
   },
   {
     path: "/register",
     name: "Register",
     component: Register,
+    meta: {
+      requiresAuth: false,
+      requested: "Auth",
+    },
   },
   {
     path: "/project/:id",
@@ -78,7 +87,11 @@ router.beforeEach((to, from, next) => {
       next("/login");
     }
   } else {
-    next();
+    if (to.matched.some((record) => record.meta.requested)) {
+      next("/dashboard");
+    } else {
+      next();
+    }
   }
 });
 
