@@ -13,20 +13,28 @@
             variant="primary"
             class="btn btn-danger float-right"
             v-on:click="deleteComment(comment.id)"
-          >Delete</b-button>
+            >Delete</b-button
+          >
           <div class="commenterImage">
             <img src="@/assets/poker-logo.png" />
           </div>
           <div class="commentText">
-            <h4>{{comment.user.login}}</h4>
-            <p class>{{comment.text}}</p>
-            <span class="date sub-text">{{new Date(comment.created).toLocaleString()}}</span>
+            <h4>{{ comment.user.login }}</h4>
+            <p class>{{ comment.text }}</p>
+            <span class="date sub-text">{{
+              new Date(comment.created).toLocaleString()
+            }}</span>
           </div>
         </li>
       </ul>
       <form class="form-inline" role="form" @submit.prevent="postComment">
         <div class="form-group">
-          <input class="form-control" type="text" v-model="newComment" placeholder="Your comment" />
+          <input
+            class="form-control"
+            type="text"
+            v-model="newComment"
+            placeholder="Your comment"
+          />
         </div>
         <div class="form-group">
           <button class="vote-btn">Add</button>
@@ -44,7 +52,7 @@ export default {
     return {
       newComment: "",
       comments: null,
-      username: ""
+      username: "",
     };
   },
   methods: {
@@ -53,55 +61,48 @@ export default {
         .post("/tasks/" + this.$route.params.id + "/comments", {
           text: this.newComment,
           taskId: this.$route.params.id,
-          userId: this.$store.getters.user.token
+          userId: this.$store.getters.user.token,
         })
-        .then(response => {
+        .then((response) => {
           if (response.status == 200) {
             this.comments.push(response.data);
             this.newComment = "";
           }
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
     deleteComment(id) {
       axios
         .delete("/tasks/" + this.$route.params.id + "/comments/" + id)
-        .then(response => {
+        .then((response) => {
           if (response.statusText == "OK") {
-            const index = this.comments.findIndex(c => c.id == id);
+            const index = this.comments.findIndex((c) => c.id == id);
             if (index > -1) {
               this.comments.splice(index, 1);
             }
           }
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
-    getComments(){
+    getComments() {
       axios
-      .get("/tasks/" + this.$route.params.id + "/comments")
-      .then(response => {
-        this.comments = response.data;
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    }
+        .get("/tasks/" + this.$route.params.id + "/comments")
+        .then((response) => {
+          this.comments = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
   created() {
     this.username = this.$store.getters.user.username;
     this.getComments();
   },
-  mounted: function () {
-        this.$nextTick(function () {
-            window.setInterval(() => {
-                this.getComments();
-            },3000);
-        })
-    }
 };
 </script>
 

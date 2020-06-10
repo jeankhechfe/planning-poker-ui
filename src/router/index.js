@@ -6,8 +6,8 @@ import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Project from "../views/Project.vue";
 import Task from "../views/Task.vue";
-import AssignedTasks from "../views/AssignedTasks"
-import user from "../store/modules/user";
+import AssignedTasks from "../views/AssignedTasks";
+import axios from "../service/axios-api";
 
 Vue.use(VueRouter);
 
@@ -18,6 +18,7 @@ const routes = [
     component: Dashboard,
     meta: {
       requiresAuth: true,
+      requested: "Dashboard",
     },
   },
   {
@@ -29,11 +30,19 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+    meta: {
+      requiresAuth: false,
+      requested: "Auth",
+    },
   },
   {
     path: "/register",
     name: "Register",
     component: Register,
+    meta: {
+      requiresAuth: false,
+      requested: "Auth",
+    },
   },
   {
     path: "/project/:id",
@@ -68,14 +77,22 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  let userSession = JSON.parse(localStorage.getItem("pp-app"));
+  let token = userSession.user.user.token;
+
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (user.state.user.token) {
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = token;
       next();
     } else {
       next("/login");
     }
   } else {
-    next();
+    if (to.matched.some((record) => record.meta.requested) && token) {
+      next("/dashboard");
+    } else {
+      next();
+    }
   }
 });
 
