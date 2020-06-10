@@ -77,8 +77,13 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  let userSession = JSON.parse(localStorage.getItem("pp-app"));
-  let token = userSession.user.user.token;
+  let userSession, token;
+  try {
+    userSession = JSON.parse(localStorage.getItem("pp-app"));
+    token = userSession.user ? userSession.user.user.token : null;
+  } catch (error) {
+    token = null;
+  }
 
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (token) {
