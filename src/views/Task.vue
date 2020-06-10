@@ -22,7 +22,7 @@
               </div>
               <div class="col-md-4">
                 <OtherVotes v-bind:estimations="estimations" v-bind:isVoted="isVoted" />
-                <h4 v-if="task.estimation != 0">Final estimation is {{task.estimation}}</h4>
+                <h4 v-if="task.estimation != 0" class="final-txt">Final estimation is {{task.estimation}}</h4>
                 <b-button
                   v-if="isOwner && task.estimation == 0"
                   variant="primary"
@@ -195,7 +195,7 @@ export default {
   margin-right: 15px;
   margin-bottom: 15px;
 }
-.h4 {
+.final-txt {
   margin-bottom: 30px;
 }
 </style>

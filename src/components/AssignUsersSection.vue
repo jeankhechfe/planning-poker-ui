@@ -7,14 +7,23 @@
       </div>
     </div>
     <div class="unassigned_users" v-if="unassigned_users.length > 0 && isOwner">
-      <h3>Unassigned Users</h3>
-      <div v-for="user in unassigned_users" v-bind:key="user.id" class="col">
-        <b-button
-          variant="primary"
-          class="btn btn-success float-right"
-          v-on:click="assigne(user)"
-        >Assign</b-button>
-        <p class="user">{{ user.username }}</p>
+      <h3>Assign New User</h3>
+      <div class="row single-task assign-n-user">
+        <!-- These options will appear after the ones from 'options' prop -->
+        <div class="col-sm-8 u-user-list">
+          <b-form-select v-model="selected" class="select-user">
+            <template v-slot:first>
+              <b-form-select-option
+                v-for="user in unassigned_users"
+                v-bind:key="user.id"
+                :value="user"
+              >{{ user.username }}</b-form-select-option>
+            </template>
+          </b-form-select>
+        </div>
+        <div class="col-sm-4 text-right">
+          <button class="btn btn-success" v-on:click="assigne(selected)">Assign User</button>
+        </div>
       </div>
     </div>
   </div>
@@ -85,7 +94,6 @@ export default {
   padding: 15px;
   margin-bottom: 30px;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  transition: all 0.5s ease 0s;
 }
 .user {
   padding: 2px 10px;
@@ -95,5 +103,8 @@ export default {
 .btn {
   border-radius: 0;
   padding: 1px 2px;
+}
+.select-user {
+  border-radius: 0;
 }
 </style>
