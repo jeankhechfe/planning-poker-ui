@@ -13,8 +13,8 @@
       <h3>Assign New User</h3>
       <div class="row single-task assign-n-user">
         <!-- These options will appear after the ones from 'options' prop -->
-        <div class="col-sm-6 u-user-list">
-          <b-form-select v-model="selected">
+        <div class="col-sm-8 u-user-list">
+          <b-form-select v-model="selected" class="select-user">
             <template v-slot:first>
               <b-form-select-option
                 v-for="user in unassigned_users"
@@ -24,7 +24,7 @@
             </template>
           </b-form-select>
         </div>
-        <div class="col-sm-6 text-right">
+        <div class="col-sm-4 text-right">
           <button class="btn btn-success" v-on:click="assigne(selected)">Assign User</button>
         </div>
       </div>
@@ -106,7 +106,6 @@ export default {
   padding: 15px;
   margin-bottom: 30px;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  transition: all 0.5s ease 0s;
 }
 .user {
   padding: 2px 10px;
@@ -130,5 +129,8 @@ export default {
 }
 .assign-n-user {
   margin: 15px;
+}
+.select-user {
+  border-radius: 0;
 }
 </style>
