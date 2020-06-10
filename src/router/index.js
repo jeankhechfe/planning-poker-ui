@@ -6,8 +6,8 @@ import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Project from "../views/Project.vue";
 import Task from "../views/Task.vue";
-import AssignedTasks from "../views/AssignedTasks"
-import user from "../store/modules/user";
+import AssignedTasks from "../views/AssignedTasks";
+import axios from "../service/axios-api";
 
 Vue.use(VueRouter);
 
@@ -69,7 +69,10 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (user.state.user.token) {
+    let userSession = JSON.parse(localStorage.getItem("pp-app"));
+    if (userSession.user.user.token) {
+      axios.defaults.headers.common["Authorization"] =
+        userSession.user.user.token;
       next();
     } else {
       next("/login");
