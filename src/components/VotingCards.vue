@@ -1,43 +1,48 @@
 <template>
   <div class="container">
-    <h2>Pick a Vote</h2>
-    <div class="btn-group">
-      <button type="button" class="vote-btn" @click="estimate(1)">
-        1 points
-      </button>
-      <button type="button" class="vote-btn" @click="estimate(2)">
-        2 points
-      </button>
-      <button type="button" class="vote-btn" @click="estimate(3)">
-        3 points
-      </button>
-      <button type="button" class="vote-btn" @click="estimate(5)">
-        5 points
-      </button>
-      <button type="button" class="vote-btn" @click="estimate(8)">
-        8 points
-      </button>
-      <button type="button" class="vote-btn" @click="estimate(13)">
-        13 points
-      </button>
-      <button type="button" class="vote-btn" @click="estimate(21)">
-        21 points
-      </button>
-      <button type="button" class="vote-btn" @click="estimate(34)">
-        34 points
-      </button>
-      <button type="button" class="vote-btn" @click="estimate(55)">
-        55 points
-      </button>
-      <button type="button" class="vote-btn" @click="estimate(89)">
-        89 points
-      </button>
-      <button type="button" class="vote-btn" @click="estimate(99999)">
-        Infinity
-      </button>
-      <button type="button" class="vote-btn" @click="estimate(123456)">
-        ?
-      </button>
+    <div v-if="isEstimationFinalized">
+      <h2>Voting to this task has finished</h2>
+    </div>
+    <div v-if="!isEstimationFinalized">
+      <h2>Pick a Vote</h2>
+      <div class="btn-group">
+        <button type="button" class="vote-btn" @click="estimate(1)">
+          1 points
+        </button>
+        <button type="button" class="vote-btn" @click="estimate(2)">
+          2 points
+        </button>
+        <button type="button" class="vote-btn" @click="estimate(3)">
+          3 points
+        </button>
+        <button type="button" class="vote-btn" @click="estimate(5)">
+          5 points
+        </button>
+        <button type="button" class="vote-btn" @click="estimate(8)">
+          8 points
+        </button>
+        <button type="button" class="vote-btn" @click="estimate(13)">
+          13 points
+        </button>
+        <button type="button" class="vote-btn" @click="estimate(21)">
+          21 points
+        </button>
+        <button type="button" class="vote-btn" @click="estimate(34)">
+          34 points
+        </button>
+        <button type="button" class="vote-btn" @click="estimate(55)">
+          55 points
+        </button>
+        <button type="button" class="vote-btn" @click="estimate(89)">
+          89 points
+        </button>
+        <button type="button" class="vote-btn" @click="estimate(99999)">
+          Infinity
+        </button>
+        <button type="button" class="vote-btn" @click="estimate(123456)">
+          ?
+        </button>
+      </div>
     </div>
     <div v-show="isVoted" style="margin-top:30px">
       <h2>You voted : {{ user_estimation }}</h2>
